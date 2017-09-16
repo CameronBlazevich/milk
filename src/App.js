@@ -10,7 +10,6 @@ import * as ActionTypes from "./actions/actionTypes";
 import * as handActions from "./actions/handActions";
 import * as positionActions from "./actions/positionActions";
 import * as modeActions from "./actions/modeActions";
-import { getSelectedHands } from "./selectors";
 //import store from "./store";
 
 class App extends Component {
