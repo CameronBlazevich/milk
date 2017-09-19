@@ -1,5 +1,6 @@
 import * as ActionTypes from "../actions/actionTypes";
 import initialState from "./initialState";
+import HandRankService from "../services/handRankService";
 import { addOrRemoveHandFromSelectedHands } from "../utilities/handClicked";
 
 export default function handReducer(state = initialState, action) {
@@ -10,6 +11,9 @@ export default function handReducer(state = initialState, action) {
         state.selectedHands
       );
       return selectedHands;
+
+    case ActionTypes.RESET:
+      return [];
 
     case ActionTypes.MODE_CHANGED:
       if (action.isQuizMode) {
@@ -23,12 +27,18 @@ export default function handReducer(state = initialState, action) {
       }
       return getHandsThatShouldBeSelected(state, action.positionId);
 
+    case ActionTypes.SLIDER_MOVED:
+      let hands = HandRankService.getHandsByPercent(action.sliderValue);
+      return hands;
+
     default:
       return state.selectedHands;
   }
 }
 
 function getHandsThatShouldBeSelected(state, incomingPositionId) {
-  return state.handRanges.find(range => range.position === incomingPositionId)
-    .hands;
+  let handRange = state.handRanges.find(
+    range => range.position === incomingPositionId
+  );
+  return handRange ? handRange.hands : [];
 }

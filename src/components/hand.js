@@ -1,18 +1,25 @@
 import React from "react";
 
-const style = {
-  width: 35,
-  height: 35,
-  display: "inline-block",
-  borderStyle: "solid",
-  borderWidth: 1,
-  borderColor: "grey",
-  borderRadius: 5,
-  margin: 3,
-  "text-align": "center",
-  "vertical-align": "middle",
-  "line-height": 35
-};
+function getClassForHand(quizResults, selectedHands, hand) {
+  let className = "hand ";
+  if (quizResults.correctlySelectedHands.includes(hand)) {
+    return className + "correctlySelected";
+  }
+
+  if (quizResults.incorrectlySelectedHands.includes(hand)) {
+    return className + "incorrectlySelected";
+  }
+
+  if (quizResults.handsThatShouldHaveBeenSelectedButWerent.includes(hand)) {
+    return className + "shouldHaveBeenSelected";
+  }
+
+  if (selectedHands.includes(hand)) {
+    return className + "selected";
+  }
+
+  return className;
+}
 
 function Hand(props) {
   let handText = "";
@@ -22,14 +29,15 @@ function Hand(props) {
     handText = `${props.columnCard + props.rowCard}o`;
   }
 
-  let className = props.selectedHands.includes(handText)
-    ? "selected hand"
-    : "hand";
+  let className = getClassForHand(
+    props.quizResults,
+    props.selectedHands,
+    handText
+  );
 
   return (
     <div
       id={handText}
-      style={style}
       onClick={() => props.handClicked(handText)}
       className={className}
     >

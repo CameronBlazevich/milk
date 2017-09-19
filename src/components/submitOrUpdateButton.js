@@ -1,10 +1,34 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 
-function SubmitOrUpdateButton(props) {
-  const buttonText = props.isQuizMode ? "Check Answer" : "Update Range";
+function getClickAction(props) {
+  if (props.hasCheckedAnswer) {
+    return props.reset;
+  }
 
-  return <Button onClick={props.saveHandRange}>{buttonText}</Button>;
+  if (props.isQuizMode) {
+    return props.checkAnswer;
+  }
+
+  return props.saveHandRange;
+}
+
+function getButtonText(props) {
+  if (props.hasCheckedAnswer) {
+    return "Reset";
+  }
+
+  if (props.isQuizMode) {
+    return "Check Answer";
+  }
+
+  return "Update Range";
+}
+
+function SubmitOrUpdateButton(props) {
+  return (
+    <Button onClick={getClickAction(props)}>{getButtonText(props)}</Button>
+  );
 }
 
 export default SubmitOrUpdateButton;

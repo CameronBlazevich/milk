@@ -6,13 +6,15 @@ import "./App.css";
 import HandGrid from "./components/handGrid";
 import PositionMenu from "./components/positionMenu";
 import SubmitOrUpdateButton from "./components/submitOrUpdateButton";
-import * as ActionTypes from "./actions/actionTypes";
+import GridLegend from "./components/gridLegend";
+import SliderWithToolTip from "./components/slider";
 import * as handActions from "./actions/handActions";
 import * as positionActions from "./actions/positionActions";
 import * as modeActions from "./actions/modeActions";
-//import store from "./store";
+import * as sliderActions from "./actions/sliderActions";
 
 class App extends Component {
+  // eslint-disable-next-line
   constructor(props) {
     super(props);
   }
@@ -22,7 +24,18 @@ class App extends Component {
   };
 
   saveHandRange = () => {
-    //store.dispatch({ type: ActionTypes.SAVE_HAND_RANGE });
+    this.props.actions.updateHandRange({
+      position: this.props.selectedPositionId,
+      hands: this.props.selectedHands
+    });
+  };
+
+  checkAnswer = () => {
+    this.props.actions.checkAnswer();
+  };
+
+  reset = () => {
+    this.props.actions.reset();
   };
 
   handlePositionSelection = positionId => {
@@ -32,8 +45,16 @@ class App extends Component {
     this.props.modeActions.modeChanged(this.props, isQuizMode);
   };
 
+  sliderMoving = value => {
+    //this.props.sliderActions.sliderMoving(value);
+  };
+
+  sliderMoved = value => {
+    this.props.sliderActions.sliderMoved(value);
+  };
+
   render() {
-    //console.log(this.props);
+    console.log(this.props);
     return (
       <div className="App container">
         <div className="row">
@@ -45,23 +66,44 @@ class App extends Component {
             />
           </div>
           <div className="col-md-8">
-            <HandGrid
-              handClicked={this.handClicked}
-              selectedHands={this.props.selectedHands}
-            />
-            <Switch
-              bsSize="normal"
-              labelWidth={100}
-              //defaultValue={false}
-              labelText="Mode"
-              onText="Quiz"
-              offText="Edit"
-              onColor="success"
-              offColor="danger"
-              onChange={(element, mode) => this.toggleMode(element, mode)}
-            />{" "}
-            <SubmitOrUpdateButton isQuizMode={this.props.isQuizMode} />
+            <div className="row">
+              <HandGrid
+                handClicked={this.handClicked}
+                selectedHands={this.props.selectedHands}
+                quizResults={this.props.quizResults}
+              />
+            </div>
+            <div className="row">
+              <div className="col-md-offset-2 col-md-8">
+                <SliderWithToolTip
+                  value={this.props.sliderValue}
+                  onAfterChange={this.sliderMoved}
+                  onChange={this.sliderMoving}
+                />
+              </div>
+              <div className="pull-left">{this.props.sliderValue + "%"}</div>
+            </div>
+            <div className="row center">
+              <Switch
+                bsSize="normal"
+                labelWidth={100}
+                labelText="Mode"
+                onText="Quiz"
+                offText="Edit"
+                onColor="success"
+                offColor="danger"
+                onChange={(element, mode) => this.toggleMode(element, mode)}
+              />{" "}
+              <SubmitOrUpdateButton
+                hasCheckedAnswer={this.props.quizResults.hasCheckedAnswer}
+                saveHandRange={this.saveHandRange}
+                checkAnswer={this.checkAnswer}
+                reset={this.reset}
+                isQuizMode={this.props.isQuizMode}
+              />
+            </div>
           </div>
+          {this.props.quizResults.hasCheckedAnswer && <GridLegend />}
         </div>
       </div>
     );
@@ -69,26 +111,22 @@ class App extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  console.log(state);
-  // const selectedHands = state.isQuizMode
-  //   ? state.selectedHands
-  //   : getSelectedHands(state);
   return {
-    //selectedHands: selectedHands,
     selectedHands: state.selectedHands,
     handRanges: state.handRanges,
     positions: state.positions,
     selectedPositionId: state.selectedPositionId,
-    isQuizMode: state.isQuizMode
+    isQuizMode: state.isQuizMode,
+    quizResults: state.quizResults,
+    sliderValue: state.sliderValue
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(handActions, dispatch),
     positionActions: bindActionCreators(positionActions, dispatch),
-    modeActions: bindActionCreators(modeActions, dispatch)
-    // handClicked: (selectedHands, clickedHand) =>
-    //   dispatch(handActions.handClicked(selectedHands, clickedHand))
+    modeActions: bindActionCreators(modeActions, dispatch),
+    sliderActions: bindActionCreators(sliderActions, dispatch)
   };
 }
 

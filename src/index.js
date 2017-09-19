@@ -8,6 +8,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/css/bootstrap-theme.css";
 import "react-bootstrap-switch/dist/css/bootstrap3/react-bootstrap-switch.min.css";
 import "./index.css";
+import "rc-slider/assets/index.css";
 import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
 //import initialState from "./reducers/initialState";
