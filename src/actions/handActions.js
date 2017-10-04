@@ -1,6 +1,17 @@
 import * as ActionTypes from "./actionTypes";
-import handRangeApi from "../api/handRangeApi";
-//import handRangeApi from "../api/mockHandRangeApi";
+import authenticatedHandRangeApi from "../api/handRangeApi";
+import unauthenticatedHandRangeApi from "../api/mockHandRangeApi";
+
+import Auth from "../services/authService";
+
+const auth = new Auth();
+// const access_token = auth.getAccessToken();
+// const authBearer = "Bearer " + access_token;
+
+let handRangeApi = unauthenticatedHandRangeApi;
+if (auth.isAuthenticated()) {
+  handRangeApi = authenticatedHandRangeApi;
+}
 
 export function reset() {
   return { type: ActionTypes.RESET };
