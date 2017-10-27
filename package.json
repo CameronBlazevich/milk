@@ -5,6 +5,7 @@
   "dependencies": {
     "auth0-js": "^8.10.1",
     "bootstrap": "^3.3.7",
+    "eslint-config-airbnb": "^16.1.0",
     "rc-slider": "^8.3.1",
     "react": "^15.6.1",
     "react-bootstrap": "^0.31.3",

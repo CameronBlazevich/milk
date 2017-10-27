@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { BrowserRouter, Router, Route } from "react-router-dom";
+import { Router, Route } from "react-router-dom";
 import configureStore from "./store/configureStore";
 import { loadPositions } from "./actions/positionActions";
 import { loadHandRanges } from "./actions/handActions";

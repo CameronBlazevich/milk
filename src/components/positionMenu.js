@@ -1,5 +1,5 @@
 import React from "react";
-import { Nav, NavItem } from "react-bootstrap";
+import { Panel, Nav, NavItem } from "react-bootstrap";
 
 function PositionMenu(props) {
   const navItems = props.positions.map(position => (
@@ -8,14 +8,16 @@ function PositionMenu(props) {
     </NavItem>
   ));
   return (
-    <Nav
-      bsStyle="pills"
-      stacked
-      activeKey={props.selectedPositionId}
-      onSelect={props.onSelect}
-    >
-      {navItems}
-    </Nav>
+    <Panel header="Position">
+      <Nav
+        bsStyle="pills"
+        stacked
+        activeKey={props.selectedPositionId}
+        onSelect={props.onSelect}
+      >
+        {navItems}
+      </Nav>
+    </Panel>
   );
 }
 

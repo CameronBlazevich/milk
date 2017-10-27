@@ -8,7 +8,7 @@ function Login(props) {
       <Navbar fluid>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="#">Hand Range Memorizer</a>
+            <span href="#">Hand Range Memorizer</span>
           </Navbar.Brand>
         </Navbar.Header>
         <Nav pullRight>
