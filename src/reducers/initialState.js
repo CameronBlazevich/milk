@@ -11,5 +11,6 @@ export default {
   selectedPositionId: 0,
   handRanges: [],
   isQuizMode: true,
-  sliderValue: 0
+  sliderValue: 0,
+  auth: { isAuthenticated: false, id_token: "" }
 };

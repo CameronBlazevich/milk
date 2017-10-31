@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { Router, Route } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 import configureStore from "./store/configureStore";
 import { loadPositions } from "./actions/positionActions";
 import { loadHandRanges } from "./actions/handActions";
@@ -27,13 +27,20 @@ const handleAuthentication = (nextState, replace) => {
 // const store = configureStore(initialState);
 const store = configureStore();
 store.dispatch(loadPositions());
-store.dispatch(loadHandRanges());
+//store.dispatch(loadHandRanges());
 
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
-      <div>
-        <Route path="/" component={App} />
+      <Switch>
+        <Route
+          exact
+          path="/home"
+          render={props => {
+            store.dispatch(loadHandRanges());
+            return <App {...props} />;
+          }}
+        />
         <Route
           path="/callback"
           render={props => {
@@ -41,7 +48,8 @@ ReactDOM.render(
             return <Callback {...props} />;
           }}
         />
-      </div>
+        <Route path="/test" component={Callback} />
+      </Switch>
     </Router>
   </Provider>,
   document.getElementById("root")

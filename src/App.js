@@ -124,7 +124,8 @@ function mapStateToProps(state, ownProps) {
     selectedPositionId: state.selectedPositionId,
     isQuizMode: state.isQuizMode,
     quizResults: state.quizResults,
-    sliderValue: state.sliderValue
+    sliderValue: state.sliderValue,
+    auth: state.auth
   };
 }
 function mapDispatchToProps(dispatch) {

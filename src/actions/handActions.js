@@ -4,14 +4,7 @@ import unauthenticatedHandRangeApi from "../api/mockHandRangeApi";
 
 import Auth from "../services/authService";
 
-const auth = new Auth();
-// const access_token = auth.getAccessToken();
-// const authBearer = "Bearer " + access_token;
-
 let handRangeApi = unauthenticatedHandRangeApi;
-if (auth.isAuthenticated()) {
-  handRangeApi = authenticatedHandRangeApi;
-}
 
 export function reset() {
   return { type: ActionTypes.RESET };
@@ -30,10 +23,16 @@ export function loadHandRangesSuccess(handRanges) {
 
 export function loadHandRanges() {
   //dispatch(isLoadingHandRanges(true));
-
+  const auth = new Auth();
+  const authBearer = getAuthToken(auth);
+  if (auth.isAuthenticated()) {
+    handRangeApi = authenticatedHandRangeApi;
+  } else {
+    handRangeApi = unauthenticatedHandRangeApi;
+  }
   return function(dispatch) {
     return handRangeApi
-      .getHandRanges()
+      .getHandRanges(authBearer)
       .then(ranges => {
         dispatch(loadHandRangesSuccess(ranges));
       })
@@ -43,10 +42,19 @@ export function loadHandRanges() {
   };
 }
 
+function getAuthToken(auth) {
+  const access_token = auth.getAccessToken();
+  const authBearer = "Bearer " + access_token;
+
+  return authBearer;
+}
+
 export function updateHandRange(handRange) {
+  const auth = new Auth();
+  const authBearer = getAuthToken(auth);
   return function(dispatch) {
     return handRangeApi
-      .updateHandRange(handRange)
+      .updateHandRange(handRange, authBearer)
       .then(savedHandRange => {
         dispatch({
           type: ActionTypes.SAVE_HAND_RANGE_SUCCESS,

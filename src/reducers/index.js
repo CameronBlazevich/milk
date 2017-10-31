@@ -5,6 +5,7 @@ import handRanges from "./handRangeReducer";
 import isQuizMode from "./modeReducer";
 import quizResults from "./quizResultsReducer";
 import sliderValue from "./sliderReducer";
+import auth from "./authReducer";
 import initialState from "./initialState";
 
 export default function rootReducer(state = initialState, action) {
@@ -15,6 +16,7 @@ export default function rootReducer(state = initialState, action) {
     positions: positions(state.positions, action),
     selectedPositionId: selectedPositionId(state.selectedPositionId, action),
     isQuizMode: isQuizMode(state.isQuizMode, action),
-    sliderValue: sliderValue(state.sliderValue, action)
+    sliderValue: sliderValue(state.sliderValue, action),
+    auth: auth(state.auth, action)
   };
 }
