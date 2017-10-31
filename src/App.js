@@ -8,11 +8,15 @@ import PositionMenu from "./components/positionMenu";
 import SubmitOrUpdateButton from "./components/submitOrUpdateButton";
 import GridLegend from "./components/gridLegend";
 import SliderWithToolTip from "./components/slider";
+import Login from "./components/login";
+import UnauthenticatedWarningMessage from "./components/unauthenticatedWarningMessage";
 import * as handActions from "./actions/handActions";
 import * as positionActions from "./actions/positionActions";
 import * as modeActions from "./actions/modeActions";
 import * as sliderActions from "./actions/sliderActions";
+import Auth from "./services/authService";
 
+const auth = new Auth();
 class App extends Component {
   // eslint-disable-next-line
   constructor(props) {
@@ -54,9 +58,11 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.props);
+    //console.log(this.props);
     return (
       <div className="App container">
+        <Login auth={auth} />
+        {!auth.isAuthenticated() && <UnauthenticatedWarningMessage />}
         <div className="row">
           <div className="col-md-2">
             <PositionMenu
@@ -118,7 +124,8 @@ function mapStateToProps(state, ownProps) {
     selectedPositionId: state.selectedPositionId,
     isQuizMode: state.isQuizMode,
     quizResults: state.quizResults,
-    sliderValue: state.sliderValue
+    sliderValue: state.sliderValue,
+    auth: state.auth
   };
 }
 function mapDispatchToProps(dispatch) {
