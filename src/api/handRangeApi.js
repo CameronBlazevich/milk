@@ -1,5 +1,3 @@
-import Auth from "../services/authService";
-
 class HandRangeApi {
   static getHandRanges(authBearer) {
     var request = new Request("http://localhost:50338/api/handRanges/", {
