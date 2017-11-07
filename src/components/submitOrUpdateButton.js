@@ -27,7 +27,9 @@ function getButtonText(props) {
 
 function SubmitOrUpdateButton(props) {
   return (
-    <Button onClick={getClickAction(props)}>{getButtonText(props)}</Button>
+    <Button disabled={props.isLoading} onClick={getClickAction(props)}>
+      {getButtonText(props)}
+    </Button>
   );
 }
 

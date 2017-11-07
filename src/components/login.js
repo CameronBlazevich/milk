@@ -13,7 +13,7 @@ function Login(props) {
         </Navbar.Header>
         <Nav pullRight>
           {isAuthenticated() && (
-            <NavDropdown title="Supreme Leader">
+            <NavDropdown id="user-info-dropdown" title="Supreme Leader">
               <MenuItem>My Profile</MenuItem>
               <MenuItem>My Account</MenuItem>
             </NavDropdown>
@@ -24,7 +24,11 @@ function Login(props) {
             </Button>
           )}
           {isAuthenticated() && (
-            <Button bsStyle="primary" className="btn-margin" onClick={logout}>
+            <Button
+              bsStyle="primary"
+              className=" primary btn-margin"
+              onClick={logout}
+            >
               Log Out
             </Button>
           )}

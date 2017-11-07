@@ -4,9 +4,6 @@ import { connect } from "react-redux";
 import * as authActions from "./actions/authActions";
 
 class Callback extends Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     const bearerToken = localStorage.getItem("access_token");
     const idToken = localStorage.getItem("id_token");
