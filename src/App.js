@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import Switch from "react-bootstrap-switch";
+import { Notify } from "react-redux-notify";
 import "./App.css";
 import HandGrid from "./components/handGrid";
 import PositionMenu from "./components/positionMenu";
@@ -17,6 +18,7 @@ import * as sliderActions from "./actions/sliderActions";
 import Auth from "./services/authService";
 
 const auth = new Auth();
+
 class App extends Component {
   // eslint-disable-next-line
   constructor(props) {
@@ -61,6 +63,7 @@ class App extends Component {
     //console.log(this.props);
     return (
       <div className="App container">
+        <Notify />
         <Login auth={auth} />
         {!auth.isAuthenticated() && <UnauthenticatedWarningMessage />}
         <div className="row">
@@ -101,6 +104,7 @@ class App extends Component {
                 onChange={(element, mode) => this.toggleMode(element, mode)}
               />{" "}
               <SubmitOrUpdateButton
+                isLoading={this.props.isLoading}
                 hasCheckedAnswer={this.props.quizResults.hasCheckedAnswer}
                 saveHandRange={this.saveHandRange}
                 checkAnswer={this.checkAnswer}
@@ -125,7 +129,8 @@ function mapStateToProps(state, ownProps) {
     isQuizMode: state.isQuizMode,
     quizResults: state.quizResults,
     sliderValue: state.sliderValue,
-    auth: state.auth
+    auth: state.auth,
+    isLoading: state.isLoading
   };
 }
 function mapDispatchToProps(dispatch) {

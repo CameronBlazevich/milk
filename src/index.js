@@ -10,6 +10,7 @@ import "bootstrap/dist/css/bootstrap-theme.css";
 import "react-bootstrap-switch/dist/css/bootstrap3/react-bootstrap-switch.min.css";
 import "./index.css";
 import "rc-slider/assets/index.css";
+import "react-redux-notify/dist/ReactReduxNotify.min.css";
 import App from "./App";
 import Callback from "./Callback";
 import Auth from "./services/authService";
