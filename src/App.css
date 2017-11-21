@@ -1,3 +1,7 @@
+:root {
+  --hand-height: 35px;
+}
+
 .App {
   text-align: center;
 }
@@ -18,11 +22,70 @@
   font-size: large;
 }
 
+.center {
+  display: inline-block;
+  text-align: center;
+}
+
+.legend-row {
+  text-align: center;
+  vertical-align: middle;
+  height: 100%;
+}
+
+.legend-label {
+  height: var(--hand-height);
+  line-height: var(--hand-height);
+  text-align: left;
+  vertical-align: middle;
+}
+
+.hand {
+  width: var(--hand-height);
+  height: var(--hand-height);
+  display: inline-block;
+  border-style: solid;
+  border-width: 1px;
+  border-color: grey;
+  border-radius: 5px;
+  margin: 3px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: var(--hand-height);
+}
 .hand:hover {
   cursor: pointer;
 }
 .selected {
   background-color: #5bc0de;
+}
+
+.correctlySelected {
+  background-color: #5bc0de;
+}
+
+.incorrectlySelected {
+  background-color: #d9534f;
+}
+
+.shouldHaveBeenSelected {
+  background-color: #5cb85c;
+}
+
+.btn-margin {
+  margin: 7px 3px;
+}
+
+.unauthenticated-warning-container {
+  margin: 10px;
+}
+
+.unauthenticated-warning-container > div {
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+  /* margin: 4px;
+  padding-top: 10px; */
 }
 
 @keyframes App-logo-spin {
