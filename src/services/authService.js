@@ -1,11 +1,12 @@
 import auth0 from "auth0-js";
 import history from "../history";
+import { authorizationRedirectUrl } from "./constants/authConstants";
 
 export default class Auth {
   auth0 = new auth0.WebAuth({
     domain: "handrangememorizer.auth0.com",
     clientID: "7KRCb5rDwME0qAhi525dJey_Fer6UJFP",
-    redirectUri: "http://localhost:3000/callback",
+    redirectUri: authorizationRedirectUrl,
     audience: "https://handrangememorizer.auth0.com/api/v2/",
     responseType: "token id_token",
     scope: "openid"
