@@ -1,7 +1,7 @@
 class HandRangeApi {
   static getHandRanges(authBearer) {
     var request = new Request(
-      "http://www.handrangememorizer.com/api/handRanges/",
+      "https://www.handrangememorizer.com/api/handRanges/",
       {
         headers: {
           Authorization: authBearer
@@ -14,7 +14,7 @@ class HandRangeApi {
 
   static updateHandRange(handRange, authBearer) {
     var request = new Request(
-      "http://www.handrangememorizer.com/api/handRanges/",
+      "https://www.handrangememorizer.com/api/handRanges/",
       {
         headers: {
           Accept: "application/json",

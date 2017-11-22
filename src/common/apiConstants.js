@@ -1,0 +1,1 @@
+export const apiBaseUrl = "https://www.handrangememorizer.com/api";
