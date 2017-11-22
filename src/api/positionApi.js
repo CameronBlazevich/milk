@@ -1,7 +1,7 @@
 class PositionApi {
   static getAllPositions(id_token) {
     var request = new Request(
-      "http://www.handrangememorizer.com/api/positions/",
+      "https://www.handrangememorizer.com/api/positions/",
       {
         headers: {
           Authorization: "Bearer " + id_token
