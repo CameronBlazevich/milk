@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import Switch from "react-bootstrap-switch";
@@ -25,6 +26,8 @@ class App extends Component {
     super(props);
   }
 
+  static selectableGroupReference = null;
+
   handClicked = clickedHand => {
     this.props.actions.handClicked(clickedHand);
   };
@@ -41,13 +44,16 @@ class App extends Component {
   };
 
   reset = () => {
+    App.selectableGroupReference.clearSelection();
     this.props.actions.reset();
   };
 
   handlePositionSelection = positionId => {
+    App.selectableGroupReference.clearSelection();
     this.props.positionActions.positionSelected(positionId);
   };
   toggleMode = (element, isQuizMode) => {
+    App.selectableGroupReference.clearSelection();
     this.props.modeActions.modeChanged(this.props, isQuizMode);
   };
 
@@ -56,13 +62,31 @@ class App extends Component {
   };
 
   sliderMoved = value => {
+    App.selectableGroupReference.clearSelection();
     this.props.sliderActions.sliderMoved(value);
   };
 
+  selectHands = selection => {
+    let selectedHandIds = selection.map(selectedItem => {
+      return selectedItem.node.id;
+    });
+
+    this.props.actions.handsSelected(selectedHandIds);
+  };
+
+  setupSelectableGroupReference(selectableGroupRef) {
+    App.selectableGroupReference = selectableGroupRef;
+    if (App.selectableGroupReference) {
+      console.log(App.selectableGroupReference.selectedItems);
+    }
+  }
+
   render() {
     //console.log(this.props);
+    //console.log(this.props.selectedHands);
+
     return (
-      <div className="App container">
+      <div className="App container" ref="test">
         <Notify />
         <Login auth={auth} />
         {!auth.isAuthenticated() && <UnauthenticatedWarningMessage />}
@@ -77,9 +101,11 @@ class App extends Component {
           <div className="col-md-8">
             <div className="row">
               <HandGrid
+                setupRef={this.setupSelectableGroupReference}
                 handClicked={this.handClicked}
                 selectedHands={this.props.selectedHands}
                 quizResults={this.props.quizResults}
+                onSelectionFinish={this.selectHands}
               />
             </div>
             <div className="row">

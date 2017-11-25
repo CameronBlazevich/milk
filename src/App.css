@@ -88,6 +88,14 @@
   padding-top: 10px; */
 }
 
+.selectable-selectbox {
+  background-color: blue;
+  border-style: dashed;
+  border-color: black;
+  border-width: 1px;
+  opacity: 0.15;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

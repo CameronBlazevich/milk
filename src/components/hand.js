@@ -1,4 +1,5 @@
 import React from "react";
+import { createSelectable } from "react-selectable-fast";
 
 function getClassForHand(quizResults, selectedHands, hand) {
   let className = "hand ";
@@ -40,10 +41,11 @@ function Hand(props) {
       id={handText}
       onClick={() => props.handClicked(handText)}
       className={className}
+      ref={props.selectableRef}
     >
       {handText}
     </div>
   );
 }
 
-export default Hand;
+export default createSelectable(Hand);

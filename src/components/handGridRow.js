@@ -13,6 +13,7 @@ function HandGridRow(props) {
       handClicked={props.handClicked}
       selectedHands={props.selectedHands}
       quizResults={props.quizResults}
+      selectableRef={props.selectableRef}
     />
   ));
   return <div className="row">{row}</div>;

@@ -12,8 +12,13 @@ let handRangeApi = unauthenticatedHandRangeApi;
 export function reset() {
   return { type: ActionTypes.RESET };
 }
+
 export function handClicked(clickedHand) {
   return { type: ActionTypes.HAND_CLICKED, clickedHand };
+}
+
+export function handsSelected(handsSelected) {
+  return { type: ActionTypes.HANDS_SELECTED, handsSelected };
 }
 
 export function checkAnswer() {
