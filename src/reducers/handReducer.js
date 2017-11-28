@@ -13,7 +13,7 @@ export default function handReducer(state = initialState, action) {
       return selectedHands;
 
     case ActionTypes.HANDS_SELECTED:
-      return action.handsSelected;
+      return [...state.selectedHands, ...action.handsSelected];
 
     case ActionTypes.RESET:
       return [];
