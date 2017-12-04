@@ -1,19 +1,26 @@
 import * as ActionTypes from "../actions/actionTypes";
 import initialState from "./initialState";
 import HandRankService from "../services/handRankService";
-import { addOrRemoveHandFromSelectedHands } from "../utilities/handClicked";
 
 export default function handReducer(state = initialState, action) {
   switch (action.type) {
-    case ActionTypes.HAND_CLICKED:
-      let selectedHands = addOrRemoveHandFromSelectedHands(
-        action.clickedHand,
-        state.selectedHands
-      );
-      return selectedHands;
-
     case ActionTypes.HANDS_SELECTED:
-      return [...state.selectedHands, ...action.handsSelected];
+      let currentlySelectedHands = [...state.selectedHands];
+      let incomingSelectedHands = [...action.handsSelected];
+
+      let handsToBeUnselected = currentlySelectedHands.filter(x =>
+        incomingSelectedHands.includes(x)
+      );
+
+      let handsToAddToSelection = incomingSelectedHands.filter(
+        x => !currentlySelectedHands.includes(x)
+      );
+
+      let resultSet = [...currentlySelectedHands].filter(
+        x => !handsToBeUnselected.includes(x)
+      );
+
+      return [...handsToAddToSelection, ...resultSet];
 
     case ActionTypes.RESET:
       return [];

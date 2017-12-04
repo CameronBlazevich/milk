@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import Switch from "react-bootstrap-switch";
@@ -17,6 +16,7 @@ import * as positionActions from "./actions/positionActions";
 import * as modeActions from "./actions/modeActions";
 import * as sliderActions from "./actions/sliderActions";
 import Auth from "./services/authService";
+import { SelectableGroup } from "react-selectable-fast";
 
 const auth = new Auth();
 
@@ -25,12 +25,7 @@ class App extends Component {
   constructor(props) {
     super(props);
   }
-
   static selectableGroupReference = null;
-
-  handClicked = clickedHand => {
-    this.props.actions.handClicked(clickedHand);
-  };
 
   saveHandRange = () => {
     this.props.actions.updateHandRange({
@@ -44,16 +39,16 @@ class App extends Component {
   };
 
   reset = () => {
-    App.selectableGroupReference.clearSelection();
+    this.refs.selectableGroup.clearSelection();
     this.props.actions.reset();
   };
 
   handlePositionSelection = positionId => {
-    App.selectableGroupReference.clearSelection();
+    this.refs.selectableGroup.clearSelection();
     this.props.positionActions.positionSelected(positionId);
   };
   toggleMode = (element, isQuizMode) => {
-    App.selectableGroupReference.clearSelection();
+    this.refs.selectableGroup.clearSelection();
     this.props.modeActions.modeChanged(this.props, isQuizMode);
   };
 
@@ -62,7 +57,7 @@ class App extends Component {
   };
 
   sliderMoved = value => {
-    App.selectableGroupReference.clearSelection();
+    this.refs.selectableGroup.selectedItems = new Set();
     this.props.sliderActions.sliderMoved(value);
   };
 
@@ -71,15 +66,11 @@ class App extends Component {
       return selectedItem.node.id;
     });
 
+    if (selectedHandIds.length > 0) {
+      this.refs.selectableGroup.clearSelection();
+    }
     this.props.actions.handsSelected(selectedHandIds);
   };
-
-  setupSelectableGroupReference(selectableGroupRef) {
-    App.selectableGroupReference = selectableGroupRef;
-    if (App.selectableGroupReference) {
-      console.log(App.selectableGroupReference.selectedItems);
-    }
-  }
 
   render() {
     //console.log(this.props);
@@ -100,13 +91,23 @@ class App extends Component {
           </div>
           <div className="col-md-8">
             <div className="row">
-              <HandGrid
-                setupRef={this.setupSelectableGroupReference}
-                handClicked={this.handClicked}
-                selectedHands={this.props.selectedHands}
-                quizResults={this.props.quizResults}
+              <SelectableGroup
+                ref={"selectableGroup"}
+                tolerance={1}
+                className="main"
+                clickClassName="tick"
+                enableDeselect
+                allowClickWithoutSelected={true}
+                //duringSelection={() => console.log("selecting...")}
                 onSelectionFinish={this.selectHands}
-              />
+                // ignoreList={['.not-selectable', '.item:nth-child(10)', '.item:nth-child(27)']}
+              >
+                <HandGrid
+                  selectedHands={this.props.selectedHands}
+                  quizResults={this.props.quizResults}
+                  selectableGroupReference={this.refs.selectableGroup}
+                />
+              </SelectableGroup>
             </div>
             <div className="row">
               <div className="col-md-offset-2 col-md-8">

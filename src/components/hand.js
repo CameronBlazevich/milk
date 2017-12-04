@@ -37,12 +37,7 @@ function Hand(props) {
   );
 
   return (
-    <div
-      id={handText}
-      onClick={() => props.handClicked(handText)}
-      className={className}
-      ref={props.selectableRef}
-    >
+    <div id={handText} className={className} ref={props.selectableRef}>
       {handText}
     </div>
   );
