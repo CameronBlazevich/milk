@@ -1,4 +1,5 @@
 export const HAND_CLICKED = "HAND_CLICKED";
+export const HANDS_SELECTED = "HANDS_SELECTED";
 // {
 //   type: HAND_CLICKED, hand;
 // }

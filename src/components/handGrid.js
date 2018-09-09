@@ -4,13 +4,12 @@ import { CardArray } from "../common/cardArray";
 
 function CardGrid(props) {
   return (
-    <div className="">
+    <div>
       {CardArray.map((card, index) => (
         <HandGridRow
           key={index}
           row={index}
           rowCard={card}
-          handClicked={props.handClicked}
           selectedHands={props.selectedHands}
           quizResults={props.quizResults}
         />

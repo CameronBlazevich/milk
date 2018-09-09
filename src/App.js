@@ -16,6 +16,7 @@ import * as positionActions from "./actions/positionActions";
 import * as modeActions from "./actions/modeActions";
 import * as sliderActions from "./actions/sliderActions";
 import Auth from "./services/authService";
+import { SelectableGroup } from "react-selectable-fast";
 
 const auth = new Auth();
 
@@ -24,10 +25,7 @@ class App extends Component {
   constructor(props) {
     super(props);
   }
-
-  handClicked = clickedHand => {
-    this.props.actions.handClicked(clickedHand);
-  };
+  static selectableGroupReference = null;
 
   saveHandRange = () => {
     this.props.actions.updateHandRange({
@@ -41,13 +39,16 @@ class App extends Component {
   };
 
   reset = () => {
+    this.refs.selectableGroup.clearSelection();
     this.props.actions.reset();
   };
 
   handlePositionSelection = positionId => {
+    this.refs.selectableGroup.clearSelection();
     this.props.positionActions.positionSelected(positionId);
   };
   toggleMode = (element, isQuizMode) => {
+    this.refs.selectableGroup.clearSelection();
     this.props.modeActions.modeChanged(this.props, isQuizMode);
   };
 
@@ -56,13 +57,27 @@ class App extends Component {
   };
 
   sliderMoved = value => {
+    this.refs.selectableGroup.selectedItems = new Set();
     this.props.sliderActions.sliderMoved(value);
+  };
+
+  selectHands = selection => {
+    let selectedHandIds = selection.map(selectedItem => {
+      return selectedItem.node.id;
+    });
+
+    if (selectedHandIds.length > 0) {
+      this.refs.selectableGroup.clearSelection();
+    }
+    this.props.actions.handsSelected(selectedHandIds);
   };
 
   render() {
     //console.log(this.props);
+    //console.log(this.props.selectedHands);
+
     return (
-      <div className="App container">
+      <div className="App container" ref="test">
         <Notify />
         <Login auth={auth} />
         {!auth.isAuthenticated() && <UnauthenticatedWarningMessage />}
@@ -76,11 +91,23 @@ class App extends Component {
           </div>
           <div className="col-md-8">
             <div className="row">
-              <HandGrid
-                handClicked={this.handClicked}
-                selectedHands={this.props.selectedHands}
-                quizResults={this.props.quizResults}
-              />
+              <SelectableGroup
+                ref={"selectableGroup"}
+                tolerance={1}
+                className="main"
+                clickClassName="tick"
+                enableDeselect
+                allowClickWithoutSelected={true}
+                //duringSelection={() => console.log("selecting...")}
+                onSelectionFinish={this.selectHands}
+                // ignoreList={['.not-selectable', '.item:nth-child(10)', '.item:nth-child(27)']}
+              >
+                <HandGrid
+                  selectedHands={this.props.selectedHands}
+                  quizResults={this.props.quizResults}
+                  selectableGroupReference={this.refs.selectableGroup}
+                />
+              </SelectableGroup>
             </div>
             <div className="row">
               <div className="col-md-offset-2 col-md-8">
