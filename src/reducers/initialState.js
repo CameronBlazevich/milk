@@ -5,12 +5,14 @@ export default {
     handsThatShouldHaveBeenSelectedButWerent: [],
     hasCheckedAnswer: false
   },
+  scenarios: [],
+  selectedScenarioId: null,
   hasCheckedAnswer: false,
   selectedHands: [],
   positions: [],
   selectedPositionId: 0,
   handRanges: [],
-  isQuizMode: true,
+  mode: "PLAY",
   sliderValue: 0,
   auth: { isAuthenticated: false, id_token: "" },
   isLoading: false

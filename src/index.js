@@ -5,6 +5,7 @@ import { Router, Route, Switch } from "react-router-dom";
 import configureStore from "./store/configureStore";
 import { loadPositions } from "./actions/positionActions";
 import { loadHandRanges } from "./actions/handActions";
+import { loadScenarios } from "./actions/scenarioActions";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/css/bootstrap-theme.css";
 import "react-bootstrap-switch/dist/css/bootstrap3/react-bootstrap-switch.min.css";
@@ -13,6 +14,7 @@ import "rc-slider/assets/index.css";
 import "react-redux-notify/dist/ReactReduxNotify.min.css";
 import App from "./App";
 import Callback from "./Callback";
+import ScenarioSelector from "./containers/scenarioSelector";
 import Auth from "./services/authService";
 import history from "./history";
 import registerServiceWorker from "./registerServiceWorker";
@@ -40,6 +42,14 @@ ReactDOM.render(
           render={props => {
             store.dispatch(loadHandRanges());
             return <App {...props} />;
+          }}
+        />
+        <Route
+          exact
+          path="/scenarios"
+          render={props => {
+            store.dispatch(loadScenarios());
+            return <ScenarioSelector {...props} />;
           }}
         />
         <Route

@@ -26,13 +26,13 @@ export default function handReducer(state = initialState, action) {
       return [];
 
     case ActionTypes.MODE_CHANGED:
-      if (action.isQuizMode) {
+      if (action.mode === "QUIZ") {
         return [];
       }
       return getHandsThatShouldBeSelected(state, state.selectedPositionId);
 
     case ActionTypes.POSITION_SELECTED:
-      if (state.isQuizMode) {
+      if (state.mode === "QUIZ") {
         return [];
       }
       return getHandsThatShouldBeSelected(state, action.positionId);

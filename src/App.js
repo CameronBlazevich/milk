@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import Switch from "react-bootstrap-switch";
+import { DropdownButton, MenuItem } from "react-bootstrap";
 import { Notify } from "react-redux-notify";
 import "./App.css";
 import HandGrid from "./components/handGrid";
@@ -47,9 +47,12 @@ class App extends Component {
     this.refs.selectableGroup.clearSelection();
     this.props.positionActions.positionSelected(positionId);
   };
-  toggleMode = (element, isQuizMode) => {
+
+  handleModeChange = switchValue => {
     this.refs.selectableGroup.clearSelection();
-    this.props.modeActions.modeChanged(this.props, isQuizMode);
+    //get which mode we're in, adjust accordingly
+    console.log(switchValue);
+    this.props.modeActions.modeChanged(this.props, switchValue);
   };
 
   sliderMoving = value => {
@@ -73,7 +76,7 @@ class App extends Component {
   };
 
   render() {
-    //console.log(this.props);
+    console.log(this.props);
     //console.log(this.props.selectedHands);
 
     return (
@@ -120,23 +123,24 @@ class App extends Component {
               <div className="pull-left">{this.props.sliderValue + "%"}</div>
             </div>
             <div className="row center">
-              <Switch
-                bsSize="normal"
-                labelWidth={100}
-                labelText="Mode"
-                onText="Quiz"
-                offText="Edit"
-                onColor="success"
-                offColor="danger"
-                onChange={(element, mode) => this.toggleMode(element, mode)}
-              />{" "}
+              <DropdownButton
+                id="GameModeSelector"
+                title={this.props.mode}
+                onSelect={this.handleModeChange}
+              >
+                <MenuItem eventKey="PLAY">Play</MenuItem>
+                <MenuItem eventKey="EDIT">Edit</MenuItem>
+                <MenuItem eventKey="QUIZ" disabled>
+                  Quiz
+                </MenuItem>
+              </DropdownButton>{" "}
               <SubmitOrUpdateButton
                 isLoading={this.props.isLoading}
                 hasCheckedAnswer={this.props.quizResults.hasCheckedAnswer}
                 saveHandRange={this.saveHandRange}
                 checkAnswer={this.checkAnswer}
                 reset={this.reset}
-                isQuizMode={this.props.isQuizMode}
+                mode={this.props.mode}
               />
             </div>
           </div>
@@ -153,10 +157,11 @@ function mapStateToProps(state, ownProps) {
     handRanges: state.handRanges,
     positions: state.positions,
     selectedPositionId: state.selectedPositionId,
-    isQuizMode: state.isQuizMode,
+    mode: state.mode,
     quizResults: state.quizResults,
     sliderValue: state.sliderValue,
     auth: state.auth,
+    selectedScenarioId: state.selectedScenarioId,
     isLoading: state.isLoading
   };
 }
@@ -169,4 +174,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

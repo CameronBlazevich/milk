@@ -6,7 +6,7 @@ function getClickAction(props) {
     return props.reset;
   }
 
-  if (props.isQuizMode) {
+  if (props.mode === "QUIZ") {
     return props.checkAnswer;
   }
 
@@ -18,18 +18,19 @@ function getButtonText(props) {
     return "Reset";
   }
 
-  if (props.isQuizMode) {
+  if (props.mode === "QUIZ") {
     return "Check Answer";
   }
-
   return "Update Range";
 }
 
 function SubmitOrUpdateButton(props) {
   return (
-    <Button disabled={props.isLoading} onClick={getClickAction(props)}>
-      {getButtonText(props)}
-    </Button>
+    (props.mode === "QUIZ" || props.mode === "EDIT") && (
+      <Button disabled={props.isLoading} onClick={getClickAction(props)}>
+        {getButtonText(props)}
+      </Button>
+    )
   );
 }
 

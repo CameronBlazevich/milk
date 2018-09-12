@@ -1,10 +1,13 @@
 import * as ActionTypes from "../actions/actionTypes";
 import initialState from "./initialState";
 
-export default function modeReducer(state = initialState.mode, action) {
+export default function scenarioReducer(
+  state = initialState.scenarios,
+  action
+) {
   switch (action.type) {
-    case ActionTypes.MODE_CHANGED:
-      return action.mode;
+    case ActionTypes.LOAD_SCENARIOS_SUCCESS:
+      return action.scenarios;
 
     default:
       return state;
