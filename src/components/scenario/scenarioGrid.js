@@ -4,7 +4,7 @@ import ScenarioTile from "./scenarioTile";
 
 function ScenarioGrid(props) {
   const scenarios = props.scenarios.map(scenario => (
-    <Link to="/home" key={scenario.id}>
+    <Link to="/play" key={scenario.id}>
       <ScenarioTile
         displayName={scenario.displayName}
         id={scenario.id}

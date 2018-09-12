@@ -18,6 +18,7 @@ import ScenarioSelector from "./containers/scenarioSelector";
 import Auth from "./services/authService";
 import history from "./history";
 import registerServiceWorker from "./registerServiceWorker";
+import PlayMode from "./containers/playMode";
 //import initialState from "./reducers/initialState";
 
 const auth = new Auth();
@@ -50,6 +51,14 @@ ReactDOM.render(
           render={props => {
             store.dispatch(loadScenarios());
             return <ScenarioSelector {...props} />;
+          }}
+        />
+        <Route
+          exact
+          path="/play"
+          render={props => {
+            store.dispatch(loadHandRanges());
+            return <PlayMode {...props} />;
           }}
         />
         <Route
