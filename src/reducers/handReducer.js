@@ -35,7 +35,11 @@ export default function handReducer(state = initialState, action) {
       if (state.mode === "QUIZ") {
         return [];
       }
-      return getHandsThatShouldBeSelected(state, action.positionId);
+      //return getHandsThatShouldBeSelected(state, action.positionId);
+      return getHandsFromHydratedScenarioThatShouldBeSelected(
+        state,
+        action.positionId
+      );
 
     case ActionTypes.SLIDER_MOVED:
       let hands = HandRankService.getHandsByPercent(action.sliderValue);
@@ -51,4 +55,25 @@ function getHandsThatShouldBeSelected(state, incomingPositionId) {
     range => range.position === incomingPositionId
   );
   return handRange ? handRange.hands : [];
+}
+
+function getHandsFromHydratedScenarioThatShouldBeSelected(
+  state,
+  incomingPositionId
+) {
+  const situation = state.hydratedScenario.situations.find(
+    situation => situation.herosPositionId === incomingPositionId
+  );
+
+  if (!situation) {
+    return [];
+  }
+
+  let handRange = situation.handRanges[0];
+
+  if (!handRange) {
+    return [];
+  }
+  var mappedForNow = handRange.hands.map(hand => hand.h);
+  return mappedForNow;
 }

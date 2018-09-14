@@ -42,7 +42,7 @@ const hydratedScenarios = [
   {
     id: 1,
     displayName: "RFI",
-    situation: [
+    situations: [
       {
         id: 1,
         scenarioId: 1,
