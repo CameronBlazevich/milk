@@ -15,5 +15,6 @@ export default {
   mode: "PLAY",
   sliderValue: 0,
   auth: { isAuthenticated: false, id_token: "" },
-  isLoading: false
+  isLoading: false,
+  hydratedScenario: {}
 };

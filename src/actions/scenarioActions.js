@@ -10,6 +10,19 @@ export function loadScenariosSuccess(scenarios) {
   return { type: ActionTypes.LOAD_SCENARIOS_SUCCESS, scenarios };
 }
 
+export function loadHydratedScenarioSuccess(hydratedScenario) {
+  return { type: ActionTypes.LOAD_HYDRATED_SCENARIO_SUCCESS, hydratedScenario };
+}
+
+export function getHydratedScenario(scenarioId) {
+  console.log("getting hydrated scenario with id: " + scenarioId);
+  return function(dispatch) {
+    scenarioApi.getHydratedScenario(scenarioId).then(hydratedScenario => {
+      dispatch(loadHydratedScenarioSuccess(hydratedScenario));
+    });
+  };
+}
+
 export function loadScenarios() {
   //dispatch(isLoadingPositions(true));
 

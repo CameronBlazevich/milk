@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import HandGrid from "../components/playMode/handGrid";
 import PositionMenu from "../components/positionMenu";
+import HandRangeMenu from "../components/handRangeSelector/handRangeSelector";
 import * as positionActions from "../actions/positionActions";
 
 import { bindActionCreators } from "redux";
@@ -20,6 +21,11 @@ class PlayMode extends Component {
     console.log(this.props);
     return (
       <div className="container App">
+        <div className="row">
+          <div className="col-md-8">
+            <HandRangeMenu handRanges={this.props.handRanges} />
+          </div>
+        </div>
         <div className="row">
           <div className="col-md-2">
             <PositionMenu
@@ -48,7 +54,8 @@ function mapStateToProps(state, ownProps) {
     auth: state.auth,
     isLoading: state.isLoading,
     scenarios: state.scenarios,
-    selectedScenarioId: state.selectedScenarioId
+    selectedScenarioId: state.selectedScenarioId,
+    hydratedScenario: state.hydratedScenario
   };
 }
 function mapDispatchToProps(dispatch) {

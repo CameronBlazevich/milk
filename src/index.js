@@ -5,7 +5,7 @@ import { Router, Route, Switch } from "react-router-dom";
 import configureStore from "./store/configureStore";
 import { loadPositions } from "./actions/positionActions";
 import { loadHandRanges } from "./actions/handActions";
-import { loadScenarios } from "./actions/scenarioActions";
+import { loadScenarios, getHydratedScenario } from "./actions/scenarioActions";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/css/bootstrap-theme.css";
 import "react-bootstrap-switch/dist/css/bootstrap3/react-bootstrap-switch.min.css";
@@ -57,6 +57,7 @@ ReactDOM.render(
           exact
           path="/play"
           render={props => {
+            store.dispatch(getHydratedScenario(1));
             store.dispatch(loadHandRanges());
             return <PlayMode {...props} />;
           }}

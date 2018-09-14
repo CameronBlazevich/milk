@@ -10,6 +10,7 @@ import auth from "./authReducer";
 import isLoading from "./isLoadingReducer";
 import scenarios from "./scenarioReducer";
 import selectedScenarioId from "./selectedScenarioReducer";
+import hydratedScenario from "./hydratedScenarioReducer";
 import initialState from "./initialState";
 
 export default function rootReducer(state = initialState, action) {
@@ -25,6 +26,7 @@ export default function rootReducer(state = initialState, action) {
     notifications: notifications(state.notifications, action),
     isLoading: isLoading(state.isLoading, action),
     scenarios: scenarios(state.scenarios, action),
-    selectedScenarioId: selectedScenarioId(state.selectedScenarioId, action)
+    selectedScenarioId: selectedScenarioId(state.selectedScenarioId, action),
+    hydratedScenario: hydratedScenario(state.hydratedScenario, action)
   };
 }

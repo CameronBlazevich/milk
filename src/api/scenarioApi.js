@@ -3,7 +3,7 @@ import delay from "./delay";
 // This file mocks a web API by working with the hard-coded data below.
 // It uses setTimeout to simulate the delay of an AJAX call.
 // All calls return promises.
-const scenarios = [
+const liteScenarios = [
   {
     id: 0,
     displayName: "RFI"
@@ -22,49 +22,137 @@ class ScenarioApi {
   static getAllScenarios() {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        resolve(Object.assign([], scenarios));
+        resolve(Object.assign([], liteScenarios));
       }, delay);
     });
   }
 
-  //   static saveCourse(course) {
-  //     course = Object.assign({}, course); // to avoid manipulating object passed in.
-  //     return new Promise((resolve, reject) => {
-  //       setTimeout(() => {
-  //         // Simulate server-side validation
-  //         const minCourseTitleLength = 1;
-  //         if (course.title.length < minCourseTitleLength) {
-  //           reject(`Title must be at least ${minCourseTitleLength} characters.`);
-  //         }
-
-  //         if (course.id) {
-  //           const existingCourseIndex = courses.findIndex(a => a.id == course.id);
-  //           courses.splice(existingCourseIndex, 1, course);
-  //         } else {
-  //           //Just simulating creation here.
-  //           //The server would generate ids and watchHref's for new courses in a real app.
-  //           //Cloning so copy returned is passed by value rather than by reference.
-  //           course.id = generateId(course);
-  //           course.watchHref = `http://www.pluralsight.com/courses/${course.id}`;
-  //           courses.push(course);
-  //         }
-
-  //         resolve(course);
-  //       }, delay);
-  //     });
-  //   }
-
-  //   static deleteCourse(courseId) {
-  //     return new Promise((resolve, reject) => {
-  //       setTimeout(() => {
-  //         const indexOfCourseToDelete = courses.findIndex(course => {
-  //           return course.courseId == courseId;
-  //         });
-  //         courses.splice(indexOfCourseToDelete, 1);
-  //         resolve();
-  //       }, delay);
-  //     });
-  //   }
+  static getHydratedScenario(id) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(Object.assign([], hydratedScenarios.find(s => s.id === id)));
+      }, delay);
+    });
+  }
 }
 
 export default ScenarioApi;
+
+const hydratedScenarios = [
+  {
+    id: 1,
+    displayName: "RFI",
+    situation: [
+      {
+        id: 1,
+        scenarioId: 1,
+        opponentsPositionId: 2,
+        opponentsPosition: {
+          id: 2,
+          displayName: "BB"
+        },
+        herosPositionId: 1,
+        herosPosition: {
+          id: 1,
+          displayName: "SB"
+        },
+        handRanges: [
+          {
+            id: 2,
+            name: "Raising Range",
+            situationId: 1,
+            hands: [
+              {
+                h: "AAo",
+                f: 95
+              },
+              {
+                h: "AKs",
+                f: 90
+              }
+            ],
+            handsWithFrequencies:
+              '[{"h": "AAo", "f": 95}, {"h": "AKs", "f": 90}]'
+          }
+        ]
+      },
+      {
+        id: 2,
+        scenarioId: 1,
+        opponentsPositionId: 3,
+        opponentsPosition: {
+          id: 3,
+          displayName: "UTG"
+        },
+        herosPositionId: 2,
+        herosPosition: {
+          id: 2,
+          displayName: "BB"
+        },
+        handRanges: [
+          {
+            id: 3,
+            name: "Raising Range",
+            situationId: 2,
+            hands: [
+              {
+                h: "AAo",
+                f: 95
+              },
+              {
+                h: "AKs",
+                f: 90
+              },
+              {
+                h: "AKo",
+                f: 85
+              }
+            ],
+            handsWithFrequencies:
+              '[{"h": "AAo", "f": 95}, {"h": "AKs", "f": 90}, {"h": "AKo", "f": 85}]'
+          }
+        ]
+      },
+      {
+        id: 3,
+        scenarioId: 1,
+        opponentsPositionId: 4,
+        opponentsPosition: {
+          id: 4,
+          displayName: "UTG1"
+        },
+        herosPositionId: 3,
+        herosPosition: {
+          id: 3,
+          displayName: "UTG"
+        },
+        handRanges: [
+          {
+            id: 4,
+            name: "Raising Range",
+            situationId: 3,
+            hands: [
+              {
+                h: "AAo",
+                f: 100
+              }
+            ],
+            handsWithFrequencies: '[{"h": "AAo", "f": 100}]'
+          },
+          {
+            id: 6,
+            name: "Folding Range",
+            situationId: 3,
+            hands: [
+              {
+                h: "72o",
+                f: 100
+              }
+            ],
+            handsWithFrequencies: '[{"h": "72o", "f": 100}]'
+          }
+        ]
+      }
+    ]
+  }
+];

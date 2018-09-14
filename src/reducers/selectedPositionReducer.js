@@ -9,6 +9,9 @@ export default function selectedPositionReducer(
     case ActionTypes.POSITION_SELECTED:
       return action.positionId;
 
+    case ActionTypes.POSITION_SET_TO_NULL:
+      return null;
+
     default:
       return state;
   }

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import * as scenarioActions from "../actions/scenarioActions";
+import * as positionActions from "../actions/positionActions";
 import ScenarioGrid from "../components/scenario/scenarioGrid";
 import "../ScenarioPage.css";
 
@@ -13,6 +14,7 @@ class ScenarioSelector extends Component {
 
   handleScenarioClick = clickedScenarioId => {
     this.props.scenarioActions.scenarioSelected(clickedScenarioId);
+    this.props.positionActions.setPositionToNull();
     console.log(clickedScenarioId);
   };
 
@@ -42,7 +44,8 @@ function mapStateToProps(state, ownProps) {
 }
 function mapDispatchToProps(dispatch) {
   return {
-    scenarioActions: bindActionCreators(scenarioActions, dispatch)
+    scenarioActions: bindActionCreators(scenarioActions, dispatch),
+    positionActions: bindActionCreators(positionActions, dispatch)
   };
 }
 
