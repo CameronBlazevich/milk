@@ -3,15 +3,13 @@ import { Link } from "react-router-dom";
 import ScenarioTile from "./scenarioTile";
 
 function ScenarioGrid(props) {
-  const scenarios = props.scenarios.map(scenario => (
-    <Link to="/play" key={scenario.id}>
-      <ScenarioTile
-        displayName={scenario.displayName}
-        id={scenario.id}
-        key={scenario.id}
-        onClick={props.handleScenarioClick}
-      />
-    </Link>
+  const scenarios = props.scenarios.map((scenario) => (
+    <ScenarioTile
+      displayName={scenario.displayName}
+      id={scenario.id}
+      key={scenario.id}
+      onClick={props.handleScenarioClick}
+    />
   ));
 
   return (
