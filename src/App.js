@@ -5,7 +5,7 @@ import { DropdownButton, MenuItem } from "react-bootstrap";
 import { Notify } from "react-redux-notify";
 import "./App.css";
 import HandGrid from "./components/handGrid";
-import PositionMenu from "./components/positionMenu";
+import ScenarioSelector from "./components/scenarioSelector";
 import SubmitOrUpdateButton from "./components/submitOrUpdateButton";
 import GridLegend from "./components/gridLegend";
 import SliderWithToolTip from "./components/slider";
@@ -30,7 +30,7 @@ class App extends Component {
   saveHandRange = () => {
     this.props.actions.updateHandRange({
       position: this.props.selectedPositionId,
-      hands: this.props.selectedHands
+      hands: this.props.selectedHands,
     });
   };
 
@@ -43,29 +43,29 @@ class App extends Component {
     this.props.actions.reset();
   };
 
-  handlePositionSelection = positionId => {
+  handlePositionSelection = (positionId) => {
     this.refs.selectableGroup.clearSelection();
     this.props.positionActions.positionSelected(positionId);
   };
 
-  handleModeChange = switchValue => {
+  handleModeChange = (switchValue) => {
     this.refs.selectableGroup.clearSelection();
     //get which mode we're in, adjust accordingly
     console.log(switchValue);
     this.props.modeActions.modeChanged(this.props, switchValue);
   };
 
-  sliderMoving = value => {
+  sliderMoving = (value) => {
     //this.props.sliderActions.sliderMoving(value);
   };
 
-  sliderMoved = value => {
+  sliderMoved = (value) => {
     this.refs.selectableGroup.selectedItems = new Set();
     this.props.sliderActions.sliderMoved(value);
   };
 
-  selectHands = selection => {
-    let selectedHandIds = selection.map(selectedItem => {
+  selectHands = (selection) => {
+    let selectedHandIds = selection.map((selectedItem) => {
       return selectedItem.node.id;
     });
 
@@ -86,11 +86,7 @@ class App extends Component {
         {!auth.isAuthenticated() && <UnauthenticatedWarningMessage />}
         <div className="row">
           <div className="col-md-2">
-            <PositionMenu
-              selectedPositionId={this.props.selectedPositionId}
-              positions={this.props.positions}
-              onSelect={this.handlePositionSelection}
-            />
+            <ScenarioSelector></ScenarioSelector>
           </div>
           <div className="col-md-8">
             <div className="row">
@@ -162,7 +158,7 @@ function mapStateToProps(state, ownProps) {
     sliderValue: state.sliderValue,
     auth: state.auth,
     selectedScenarioId: state.selectedScenarioId,
-    isLoading: state.isLoading
+    isLoading: state.isLoading,
   };
 }
 function mapDispatchToProps(dispatch) {
@@ -170,11 +166,8 @@ function mapDispatchToProps(dispatch) {
     actions: bindActionCreators(handActions, dispatch),
     positionActions: bindActionCreators(positionActions, dispatch),
     modeActions: bindActionCreators(modeActions, dispatch),
-    sliderActions: bindActionCreators(sliderActions, dispatch)
+    sliderActions: bindActionCreators(sliderActions, dispatch),
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

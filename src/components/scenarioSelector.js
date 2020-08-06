@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import * as scenarioActions from "../actions/scenarioActions";
 import * as positionActions from "../actions/positionActions";
 import { Menu, Dropdown } from "antd";
 import { DownOutlined } from "@ant-design/icons";
@@ -100,7 +99,6 @@ function mapStateToProps(state, ownProps) {
 }
 function mapDispatchToProps(dispatch) {
   return {
-    scenarioActions: bindActionCreators(scenarioActions, dispatch),
     positionActions: bindActionCreators(positionActions, dispatch),
   };
 }

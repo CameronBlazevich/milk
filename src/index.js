@@ -14,11 +14,10 @@ import "rc-slider/assets/index.css";
 import "react-redux-notify/dist/ReactReduxNotify.min.css";
 import App from "./App";
 import Callback from "./Callback";
-import ScenarioSelector from "./containers/scenarioSelector";
+import ScenarioSelector from "./components/scenarioSelector";
 import Auth from "./services/authService";
 import history from "./history";
 import registerServiceWorker from "./registerServiceWorker";
-import PlayMode from "./containers/playMode";
 import "antd/dist/antd.css";
 //import initialState from "./reducers/initialState";
 
@@ -43,6 +42,7 @@ ReactDOM.render(
           path="/home"
           render={(props) => {
             store.dispatch(loadHandRanges());
+            store.dispatch(loadScenarios());
             return <App {...props} />;
           }}
         />
@@ -50,17 +50,9 @@ ReactDOM.render(
           exact
           path="/scenarios"
           render={(props) => {
-            store.dispatch(loadScenarios());
-            return <ScenarioSelector {...props} />;
-          }}
-        />
-        <Route
-          exact
-          path="/play"
-          render={(props) => {
-            store.dispatch(getHydratedScenario(1));
             store.dispatch(loadHandRanges());
-            return <PlayMode {...props} />;
+            store.dispatch(loadScenarios());
+            return <App {...props} />;
           }}
         />
         <Route
