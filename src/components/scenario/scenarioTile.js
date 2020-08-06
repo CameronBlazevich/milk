@@ -1,13 +1,14 @@
 import React from "react";
 
 function ScenarioTile(props) {
+  const { selected, id, onClick, displayName } = props;
   return (
     <div
-      className="scenario-tile"
-      id={props.id}
-      onClick={() => props.onClick(props.id)}
+      className={"scenario-tile " + (selected ? "selected" : "")}
+      id={id}
+      onClick={() => onClick(id)}
     >
-      {props.displayName}
+      {displayName}
     </div>
   );
 }

@@ -9,6 +9,7 @@ function ScenarioGrid(props) {
       id={scenario.id}
       key={scenario.id}
       onClick={props.handleScenarioClick}
+      selected={props.selectedScenarioId === scenario.id}
     />
   ));
 
