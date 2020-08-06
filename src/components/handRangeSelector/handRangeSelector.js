@@ -1,8 +1,8 @@
 import React from "react";
-import { Panel, Nav, NavItem } from "react-bootstrap";
+import { Panel, Nav, NavItem } from "reactstrap";
 
 function HandRangeMenu(props) {
-  const navItems = props.handRanges.map(handRange => (
+  const navItems = props.handRanges.map((handRange) => (
     <NavItem key={handRange.id} eventKey={handRange.id}>
       {handRange.displayName}
     </NavItem>

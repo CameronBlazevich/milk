@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { DropdownButton, MenuItem } from "react-bootstrap";
+import { ButtonDropdown, DropdownItem } from "reactstrap";
 import { Notify } from "react-redux-notify";
 import "./App.css";
 import HandGrid from "./components/handGrid";
@@ -118,17 +118,17 @@ class App extends Component {
               <div className="pull-left">{this.props.sliderValue + "%"}</div>
             </div>
             <div className="row center">
-              <DropdownButton
+              <ButtonDropdown
                 id="GameModeSelector"
                 title={this.props.mode}
                 onSelect={this.handleModeChange}
               >
-                <MenuItem eventKey="PLAY">Play</MenuItem>
-                <MenuItem eventKey="EDIT">Edit</MenuItem>
-                <MenuItem eventKey="QUIZ" disabled>
+                <DropdownItem eventKey="PLAY">Play</DropdownItem>
+                <DropdownItem eventKey="EDIT">Edit</DropdownItem>
+                <DropdownItem eventKey="QUIZ" disabled>
                   Quiz
-                </MenuItem>
-              </DropdownButton>{" "}
+                </DropdownItem>
+              </ButtonDropdown>{" "}
               <SubmitOrUpdateButton
                 isLoading={this.props.isLoading}
                 hasCheckedAnswer={this.props.quizResults.hasCheckedAnswer}

@@ -1,22 +1,37 @@
 import React from "react";
-import { Navbar, Nav, NavDropdown, MenuItem, Button } from "react-bootstrap";
+import {
+  Navbar,
+  NavbarBrand,
+  Nav,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  Button,
+} from "reactstrap";
 
 function Login(props) {
   const { isAuthenticated, login, logout } = props.auth;
   return (
     <div className="login-nav text-center">
-      <Navbar fluid>
-        <Navbar.Header>
-          <Navbar.Brand>
-            <span href="#">Hand Range Memorizer</span>
-          </Navbar.Brand>
-        </Navbar.Header>
+      <Navbar dark>
+        <NavbarBrand>
+          <span href="#">Hand Range Memorizer</span>
+        </NavbarBrand>
         <Nav pullRight>
           {isAuthenticated() && (
-            <NavDropdown id="user-info-dropdown" title="Supreme Leader">
-              <MenuItem>My Profile</MenuItem>
-              <MenuItem>My Account</MenuItem>
-            </NavDropdown>
+            <UncontrolledDropdown
+              nav
+              inNavbar
+              id="user-info-dropdown"
+              title="Supreme Leader"
+            >
+              <DropdownToggle nav caret></DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem>My Profile</DropdownItem>
+                <DropdownItem>My Account</DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
           )}
           {!isAuthenticated() && (
             <Button bsStyle="primary" className="btn-margin" onClick={login}>
