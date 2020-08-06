@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { DropdownButton, MenuItem } from "react-bootstrap";
 import * as scenarioActions from "../actions/scenarioActions";
 import * as positionActions from "../actions/positionActions";
-import ScenarioGrid from "../components/scenario/scenarioGrid";
+import { Menu, Dropdown } from "antd";
+import { DownOutlined } from "@ant-design/icons";
 import "../ScenarioPage.css";
 
 class ScenarioSelector extends Component {
@@ -13,53 +13,73 @@ class ScenarioSelector extends Component {
     super(props);
   }
 
-  handleScenarioClick = (clickedScenarioId) => {
-    this.props.scenarioActions.scenarioSelected(clickedScenarioId);
-    this.props.positionActions.setPositionToNull();
-    console.log(clickedScenarioId);
+  handlePositionClick = (clickedCompositeKey) => {
+    this.props.positionActions.positionSelectedForEdit(clickedCompositeKey);
   };
 
-  renderSituationDropdown = () => {
-    if (
-      this.props.selectedScenarioId === undefined ||
-      this.props.selectedScenarioId === null
-    ) {
-      return null;
-    }
+  renderPositionSelector = () => {
+    const { SubMenu } = Menu;
+    const { scenarios } = this.props;
+    const scenarioMenuGroups = scenarios.map((scenario) => {
+      const situationSubMenus = scenario.situations.map((situation) => {
+        const positionMenuItems = situation.positions.map((position) => {
+          return (
+            <Menu.Item key={`${scenario.id}-${situation.id}-${position.key}`}>
+              {position.key}
+            </Menu.Item>
+          );
+        });
 
-    const situations = this.props.scenarios.find(
-      (s) => s.id === this.props.selectedScenarioId
-    ).situations;
+        return (
+          <SubMenu
+            title={situation.displayName}
+            key={`${scenario.id}-${situation.id}`}
+          >
+            {positionMenuItems}
+          </SubMenu>
+        );
+      });
 
-    const dropDownItems = situations.map((situation) => {
       return (
-        <MenuItem
-          eventKey={situation.id}
-          onSelect={() => console.log("Selected Situation " + situation.id)}
-        >
-          {situation.displayName}
-        </MenuItem>
+        <Menu.ItemGroup title={scenario.displayName} key={`${scenario.id}`}>
+          {situationSubMenus}
+        </Menu.ItemGroup>
       );
     });
 
+    const menu = (
+      <Menu
+        onClick={({ item, key }) => {
+          const splitKey = key.split("-");
+          const scenarioId = splitKey[0];
+          const situationId = splitKey[1];
+          const positionKey = splitKey[2];
+
+          const selectedPositionCompositeKey = {
+            scenarioId,
+            situationId,
+            positionKey,
+          };
+
+          //DISPATCH THIS INFO
+          this.handlePositionClick(selectedPositionCompositeKey);
+        }}
+      >
+        {scenarioMenuGroups}
+      </Menu>
+    );
+
     return (
-      <DropdownButton title="Situations" bsStyle="primary">
-        {dropDownItems}
-      </DropdownButton>
+      <Dropdown overlay={menu}>
+        <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
+          Select Scenario <DownOutlined />
+        </a>
+      </Dropdown>
     );
   };
 
   render() {
-    return (
-      <div>
-        <ScenarioGrid
-          scenarios={this.props.scenarios}
-          handleScenarioClick={this.handleScenarioClick}
-          selectedScenarioId={this.props.selectedScenarioId}
-        />
-        {this.renderSituationDropdown()}
-      </div>
-    );
+    return <div>{this.renderPositionSelector()}</div>;
   }
 }
 
@@ -75,7 +95,7 @@ function mapStateToProps(state, ownProps) {
     auth: state.auth,
     isLoading: state.isLoading,
     scenarios: state.scenarios,
-    selectedScenarioId: state.selectedScenarioId,
+    selectedPositionCompositeKey: state.selectedPositionCompositeKey,
   };
 }
 function mapDispatchToProps(dispatch) {

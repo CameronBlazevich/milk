@@ -19,6 +19,7 @@ import Auth from "./services/authService";
 import history from "./history";
 import registerServiceWorker from "./registerServiceWorker";
 import PlayMode from "./containers/playMode";
+import "antd/dist/antd.css";
 //import initialState from "./reducers/initialState";
 
 const auth = new Auth();
@@ -40,7 +41,7 @@ ReactDOM.render(
         <Route
           exact
           path="/home"
-          render={props => {
+          render={(props) => {
             store.dispatch(loadHandRanges());
             return <App {...props} />;
           }}
@@ -48,7 +49,7 @@ ReactDOM.render(
         <Route
           exact
           path="/scenarios"
-          render={props => {
+          render={(props) => {
             store.dispatch(loadScenarios());
             return <ScenarioSelector {...props} />;
           }}
@@ -56,7 +57,7 @@ ReactDOM.render(
         <Route
           exact
           path="/play"
-          render={props => {
+          render={(props) => {
             store.dispatch(getHydratedScenario(1));
             store.dispatch(loadHandRanges());
             return <PlayMode {...props} />;
@@ -64,7 +65,7 @@ ReactDOM.render(
         />
         <Route
           path="/callback"
-          render={props => {
+          render={(props) => {
             handleAuthentication(props);
             return <Callback {...props} />;
           }}

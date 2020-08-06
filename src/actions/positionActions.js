@@ -10,6 +10,10 @@ export function positionSelected(positionId) {
   return { type: ActionTypes.POSITION_SELECTED, positionId };
 }
 
+export function positionSelectedForEdit(positionCompositeKey) {
+  return { type: ActionTypes.POSITION_SELECTED_FOR_EDIT, positionCompositeKey };
+}
+
 export function loadPositionsSuccess(positions) {
   return { type: ActionTypes.LOAD_POSITIONS_SUCCESS, positions };
 }
@@ -17,13 +21,13 @@ export function loadPositionsSuccess(positions) {
 export function loadPositions() {
   //dispatch(isLoadingPositions(true));
 
-  return function(dispatch) {
+  return function (dispatch) {
     return positionsApi
       .getAllPositions()
-      .then(positions => {
+      .then((positions) => {
         dispatch(loadPositionsSuccess(positions));
       })
-      .catch(error => {
+      .catch((error) => {
         throw error;
       });
   };

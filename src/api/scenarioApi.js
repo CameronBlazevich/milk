@@ -158,10 +158,10 @@ const liteScenarios = [
       },
     ],
   },
-  {
-    id: 2,
-    displayName: "Open Facing 3-Bet",
-  },
+  // {
+  //   id: 2,
+  //   displayName: "Open Facing 3-Bet",
+  // },
 ];
 
 class ScenarioApi {
