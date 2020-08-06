@@ -12,10 +12,6 @@ class ScenarioSelector extends Component {
     super(props);
   }
 
-  handlePositionClick = (clickedCompositeKey) => {
-    this.props.positionActions.positionSelectedForEdit(clickedCompositeKey);
-  };
-
   renderPositionSelector = () => {
     const { SubMenu } = Menu;
     const { scenarios } = this.props;
@@ -50,8 +46,8 @@ class ScenarioSelector extends Component {
       <Menu
         onClick={({ item, key }) => {
           const splitKey = key.split("-");
-          const scenarioId = splitKey[0];
-          const situationId = splitKey[1];
+          const scenarioId = parseInt(splitKey[0]);
+          const situationId = parseInt(splitKey[1]);
           const positionKey = splitKey[2];
 
           const selectedPositionCompositeKey = {
@@ -61,7 +57,7 @@ class ScenarioSelector extends Component {
           };
 
           //DISPATCH THIS INFO
-          this.handlePositionClick(selectedPositionCompositeKey);
+          this.props.onItemSelect(selectedPositionCompositeKey);
         }}
       >
         {scenarioMenuGroups}
@@ -77,8 +73,39 @@ class ScenarioSelector extends Component {
     );
   };
 
+  renderSelectedPosition = () => {
+    if (!this.props.selectedPositionKey) {
+      return null;
+    }
+
+    const scenario = this.props.scenarios.find(
+      (s) => s.id === this.props.selectedPositionKey.scenarioId
+    );
+
+    const situation = scenario.situations.find(
+      (s) => s.id === this.props.selectedPositionKey.situationId
+    );
+
+    const position = situation.positions.find(
+      (p) => p.key === this.props.selectedPositionKey.positionKey
+    );
+
+    return (
+      <div>
+        <div>Scenario: {scenario.displayName}</div>
+        <div>Situation: {situation.displayName}</div>
+        <div>Position: {position.key}</div>
+      </div>
+    );
+  };
+
   render() {
-    return <div>{this.renderPositionSelector()}</div>;
+    return (
+      <div>
+        {this.renderSelectedPosition()}
+        {this.renderPositionSelector()}
+      </div>
+    );
   }
 }
 
@@ -94,7 +121,7 @@ function mapStateToProps(state, ownProps) {
     auth: state.auth,
     isLoading: state.isLoading,
     scenarios: state.scenarios,
-    selectedPositionCompositeKey: state.selectedPositionCompositeKey,
+    selectedPositionKey: state.selectedPositionKey,
   };
 }
 function mapDispatchToProps(dispatch) {

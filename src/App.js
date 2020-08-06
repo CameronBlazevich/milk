@@ -43,9 +43,9 @@ class App extends Component {
     this.props.actions.reset();
   };
 
-  handlePositionSelection = (positionId) => {
+  handlePositionSelection = (positionCompositeKey) => {
     this.refs.selectableGroup.clearSelection();
-    this.props.positionActions.positionSelected(positionId);
+    this.props.positionActions.positionSelectedForEdit(positionCompositeKey);
   };
 
   handleModeChange = (switchValue) => {
@@ -76,9 +76,6 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.props);
-    //console.log(this.props.selectedHands);
-
     return (
       <div className="App container" ref="test">
         <Notify />
@@ -86,7 +83,9 @@ class App extends Component {
         {!auth.isAuthenticated() && <UnauthenticatedWarningMessage />}
         <div className="row">
           <div className="col-md-2">
-            <ScenarioSelector></ScenarioSelector>
+            <ScenarioSelector
+              onItemSelect={this.handlePositionSelection}
+            ></ScenarioSelector>
           </div>
           <div className="col-md-8">
             <div className="row">

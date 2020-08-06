@@ -16,22 +16,24 @@ const liteScenarios = [
           {
             key: "UTG",
             situationId: 0,
-            handRange: [],
+            handRange: { hands: ["AAo"] },
           },
           {
             key: "HJ",
             situationId: 0,
-            handRange: [],
+            handRange: { hands: ["AAo", "KKo", "QQo"] },
           },
           {
             key: "CO",
             situationId: 0,
-            handRange: [],
+            handRange: { hands: ["AAo", "KKo", "QQo", "AKs", "AKo"] },
           },
           {
             key: "BTN",
             situationId: 0,
-            handRange: [],
+            handRange: {
+              hands: ["AAo", "KKo", "QQo", "AKs", "AKo", "AQs", "AQo", "JJo"],
+            },
           },
           {
             key: "SB",

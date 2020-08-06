@@ -1,7 +1,7 @@
 import notifications from "react-redux-notify";
 import selectedHands from "./handReducer";
 import positions from "./positionReducer";
-import selectedPositionId from "./selectedPositionReducer";
+import selectedPositionKey from "./selectedPositionReducer";
 import handRanges from "./handRangeReducer";
 import mode from "./modeReducer";
 import quizResults from "./quizResultsReducer";
@@ -19,7 +19,7 @@ export default function rootReducer(state = initialState, action) {
     selectedHands: selectedHands(state, action),
     handRanges: handRanges(state.handRanges, action),
     positions: positions(state.positions, action),
-    selectedPositionId: selectedPositionId(state.selectedPositionId, action),
+    selectedPositionKey: selectedPositionKey(state.selectedPositionKey, action),
     mode: mode(state.mode, action),
     sliderValue: sliderValue(state.sliderValue, action),
     auth: auth(state.auth, action),
@@ -27,6 +27,6 @@ export default function rootReducer(state = initialState, action) {
     isLoading: isLoading(state.isLoading, action),
     scenarios: scenarios(state.scenarios, action),
     selectedScenarioId: selectedScenarioId(state.selectedScenarioId, action),
-    hydratedScenario: hydratedScenario(state.hydratedScenario, action)
+    hydratedScenario: hydratedScenario(state.hydratedScenario, action),
   };
 }
