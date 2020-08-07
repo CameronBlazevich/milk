@@ -2,36 +2,19 @@ import React from "react";
 import { Button } from "reactstrap";
 
 function getClickAction(props) {
-  if (props.hasCheckedAnswer) {
-    return props.reset;
-  }
-
-  if (props.mode === "QUIZ") {
-    return props.checkAnswer;
-  }
-
   return props.saveHandRange;
 }
 
-function getButtonText(props) {
-  if (props.hasCheckedAnswer) {
-    return "Reset";
-  }
-
-  if (props.mode === "QUIZ") {
-    return "Check Answer";
-  }
+function getButtonText() {
   return "Update Range";
 }
 
-function SubmitOrUpdateButton(props) {
+function UpdateRangeButton(props) {
   return (
-    (props.mode === "QUIZ" || props.mode === "EDIT") && (
-      <Button disabled={props.isLoading} onClick={getClickAction(props)}>
-        {getButtonText(props)}
-      </Button>
-    )
+    <Button disabled={props.isLoading} onClick={getClickAction(props)}>
+      {getButtonText()}
+    </Button>
   );
 }
 
-export default SubmitOrUpdateButton;
+export default UpdateRangeButton;

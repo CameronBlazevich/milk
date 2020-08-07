@@ -26,8 +26,8 @@ const handRanges = [
       "AJo",
       "AQo",
       "AAo",
-      "AKs"
-    ]
+      "AKs",
+    ],
   },
   { userId: 0, position: 1, hands: ["AAo", "KKo", "QQo", "A5s"] },
   {
@@ -57,10 +57,10 @@ const handRanges = [
       "A5s",
       "AQo",
       "JTs",
-      "QJs"
-    ]
+      "QJs",
+    ],
   },
-  { userId: 0, position: 3, hands: ["AAo", "KKo", "AKo", "KQs", "AQs", "AKs"] }
+  { userId: 0, position: 3, hands: ["AAo", "KKo", "AKo", "KQs", "AQs", "AKs"] },
 ];
 
 class HandRangeApi {
@@ -76,9 +76,9 @@ class HandRangeApi {
     handRange = Object.assign({}, handRange); // to avoid manipulating object passed in.
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        if (handRanges.find(range => range.position === handRange.position)) {
+        if (handRanges.find((range) => range.position === handRange.position)) {
           const existingHandRangeIndex = handRanges.findIndex(
-            a => a.position === handRange.position
+            (a) => a.position === handRange.position
           );
           handRanges.splice(existingHandRangeIndex, 1, handRange);
         } else {

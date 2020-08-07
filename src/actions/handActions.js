@@ -37,15 +37,15 @@ export function loadHandRanges() {
   } else {
     handRangeApi = unauthenticatedHandRangeApi;
   }
-  return function(dispatch) {
+  return function (dispatch) {
     dispatch(isLoading(ActionTypes.IS_LOADING_HAND_RANGES, true));
     return handRangeApi
       .getHandRanges(authBearer)
-      .then(ranges => {
+      .then((ranges) => {
         dispatch(loadHandRangesSuccess(ranges));
         dispatch(isLoading(ActionTypes.IS_LOADING_HAND_RANGES, false));
       })
-      .catch(error => {
+      .catch((error) => {
         throw error;
       });
   };
@@ -58,22 +58,22 @@ function getAuthToken(auth) {
   return authBearer;
 }
 
-export function updateHandRange(handRange) {
+export function updateHandRange({ positionKey, hands }) {
   const auth = new Auth();
   const authBearer = getAuthToken(auth);
-  return function(dispatch) {
+  return function (dispatch) {
     dispatch(isLoading(ActionTypes.IS_UPDATING_HAND_RANGES, true));
     return handRangeApi
-      .updateHandRange(handRange, authBearer)
-      .then(savedHandRange => {
+      .updateHandRange(positionKey, hands, authBearer)
+      .then((savedHandRange) => {
         dispatch({
           type: ActionTypes.SAVE_HAND_RANGE_SUCCESS,
-          handRange: savedHandRange
+          handRange: savedHandRange,
         });
         dispatch(isLoading(ActionTypes.IS_UPDATING_HAND_RANGES, false));
         dispatch(createNotification(handRangeUpdateSuccessNotification));
       })
-      .catch(error => {
+      .catch((error) => {
         throw error;
       });
   };

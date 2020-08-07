@@ -15,7 +15,7 @@ function getClassForHand(quizResults, selectedHands, hand) {
     return className + "shouldHaveBeenSelected";
   }
 
-  if (selectedHands.includes(hand)) {
+  if (selectedHands && selectedHands.includes(hand)) {
     return className + "selected";
   }
 

@@ -5,18 +5,17 @@ import { Router, Route, Switch } from "react-router-dom";
 import configureStore from "./store/configureStore";
 import { loadPositions } from "./actions/positionActions";
 import { loadHandRanges } from "./actions/handActions";
-import { loadScenarios, getHydratedScenario } from "./actions/scenarioActions";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./index.css";
-import "rc-slider/assets/index.css";
-import "react-redux-notify/dist/ReactReduxNotify.min.css";
+import { loadScenarios } from "./actions/scenarioActions";
 import App from "./App";
 import Callback from "./Callback";
-import ScenarioSelector from "./components/scenarioSelector";
 import Auth from "./services/authService";
 import history from "./history";
 import registerServiceWorker from "./registerServiceWorker";
-import "antd/dist/antd.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "rc-slider/assets/index.css";
+import "react-redux-notify/dist/ReactReduxNotify.min.css";
+import "./index.css";
+
 //import initialState from "./reducers/initialState";
 
 const auth = new Auth();
@@ -28,7 +27,7 @@ const handleAuthentication = (nextState, replace) => {
 };
 // const store = configureStore(initialState);
 const store = configureStore();
-store.dispatch(loadPositions());
+// store.dispatch(loadPositions());
 //store.dispatch(loadHandRanges());
 
 ReactDOM.render(

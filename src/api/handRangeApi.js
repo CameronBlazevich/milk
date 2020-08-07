@@ -4,28 +4,28 @@ class HandRangeApi {
   static getHandRanges(authBearer) {
     var request = new Request(apiBaseUrl + "handRanges/", {
       headers: {
-        Authorization: authBearer
+        Authorization: authBearer,
       },
-      method: "GET"
+      method: "GET",
     });
-    return fetch(request).then(response => response.json());
+    return fetch(request).then((response) => response.json());
   }
 
-  static updateHandRange(handRange, authBearer) {
+  static updateHandRange(positionKey, hands, authBearer) {
     var request = new Request(apiBaseUrl + "handRanges/", {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: authBearer
+        Authorization: authBearer,
       },
       method: "POST",
       body: JSON.stringify({
-        position: handRange.position,
-        hands: handRange.hands
-      })
+        position: positionKey,
+        hands: hands,
+      }),
     });
 
-    return fetch(request).then(response => response.json());
+    return fetch(request).then((response) => response.json());
   }
 }
 

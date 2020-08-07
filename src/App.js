@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { ButtonDropdown, DropdownItem } from "reactstrap";
+import GameModeSelector from "./components/gameModeSelector";
 import { Notify } from "react-redux-notify";
-import "./App.css";
 import HandGrid from "./components/handGrid";
 import ScenarioSelector from "./components/scenarioSelector";
-import SubmitOrUpdateButton from "./components/submitOrUpdateButton";
+import UpdateRangeButton from "./components/submitOrUpdateButton";
 import GridLegend from "./components/gridLegend";
 import SliderWithToolTip from "./components/slider";
 import Login from "./components/login";
@@ -17,6 +16,7 @@ import * as modeActions from "./actions/modeActions";
 import * as sliderActions from "./actions/sliderActions";
 import Auth from "./services/authService";
 import { SelectableGroup } from "react-selectable-fast";
+import "./App.css";
 
 const auth = new Auth();
 
@@ -29,7 +29,7 @@ class App extends Component {
 
   saveHandRange = () => {
     this.props.actions.updateHandRange({
-      position: this.props.selectedPositionId,
+      positionKey: this.props.selectedPositionKey,
       hands: this.props.selectedHands,
     });
   };
@@ -118,24 +118,10 @@ class App extends Component {
               <div className="pull-left">{this.props.sliderValue + "%"}</div>
             </div>
             <div className="row center">
-              <ButtonDropdown
-                id="GameModeSelector"
-                title={this.props.mode}
-                onSelect={this.handleModeChange}
-              >
-                <DropdownItem eventKey="PLAY">Play</DropdownItem>
-                <DropdownItem eventKey="EDIT">Edit</DropdownItem>
-                <DropdownItem eventKey="QUIZ" disabled>
-                  Quiz
-                </DropdownItem>
-              </ButtonDropdown>{" "}
-              <SubmitOrUpdateButton
+              {/* <GameModeSelector></GameModeSelector> */}
+              <UpdateRangeButton
                 isLoading={this.props.isLoading}
-                hasCheckedAnswer={this.props.quizResults.hasCheckedAnswer}
                 saveHandRange={this.saveHandRange}
-                checkAnswer={this.checkAnswer}
-                reset={this.reset}
-                mode={this.props.mode}
               />
             </div>
           </div>
@@ -151,7 +137,7 @@ function mapStateToProps(state, ownProps) {
     selectedHands: state.selectedHands,
     handRanges: state.handRanges,
     positions: state.positions,
-    selectedPositionId: state.selectedPositionId,
+    selectedPositionKey: state.selectedPositionKey,
     mode: state.mode,
     quizResults: state.quizResults,
     sliderValue: state.sliderValue,

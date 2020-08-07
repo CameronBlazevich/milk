@@ -5,6 +5,7 @@ import * as positionActions from "../actions/positionActions";
 import { Menu, Dropdown } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import "../ScenarioPage.css";
+import "antd/dist/antd.css";
 
 class ScenarioSelector extends Component {
   // eslint-disable-next-line
@@ -114,7 +115,6 @@ function mapStateToProps(state, ownProps) {
     // selectedHands: state.selectedHands,
     // handRanges: state.handRanges,
     // positions: state.positions,
-    // selectedPositionId: state.selectedPositionId,
     // mode: state.mode,
     // quizResults: state.quizResults,
     // sliderValue: state.sliderValue,
