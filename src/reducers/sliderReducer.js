@@ -9,8 +9,8 @@ export default function sliderReducer(
     case ActionTypes.SLIDER_MOVED:
       return action.sliderValue;
 
-    //case ActionTypes.SLIDER_MOVING:
-    //return action.sliderValue;
+    case ActionTypes.POSITION_SELECTED_FOR_EDIT:
+      return 0;
 
     case ActionTypes.MODE_CHANGED:
       return 0;
