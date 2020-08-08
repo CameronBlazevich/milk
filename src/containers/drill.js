@@ -1,12 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Row, Col } from "reactstrap";
 import PokerTable from "../components/drill/pokerTable";
+import RangeUpdater from "../components/RangeUpdater";
 
 class Drill extends Component {
   render() {
     return (
-      <div className="container">
-        <PokerTable></PokerTable>
+      <div className="drill-container">
+        <Row>
+          <div>
+            <h2>Choose Scenarios to Drill</h2>
+          </div>
+        </Row>
+        <Row>
+          <PokerTable></PokerTable>
+          {/* <RangeUpdater></RangeUpdater> */}
+        </Row>
       </div>
     );
   }

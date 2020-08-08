@@ -47,7 +47,7 @@ class RangeUpdater extends Component {
 
   render() {
     return (
-      <div>
+      <div className="range-updater-container">
         <div className="row">
           <SelectableGroup
             ref={"selectableGroup"}
