@@ -10,7 +10,7 @@ function HandRangeMenu(props) {
   return (
     <Panel header="Hand Range To Display">
       <Nav
-        bsStyle="pills"
+        bsstyle="pills"
         activeKey={props.selectedHandRangeId}
         onSelect={props.onSelect}
       >

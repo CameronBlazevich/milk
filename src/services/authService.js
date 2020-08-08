@@ -8,8 +8,8 @@ export default class Auth {
     clientID: "7KRCb5rDwME0qAhi525dJey_Fer6UJFP",
     redirectUri: authorizationRedirectUrl,
     audience: "https://handrangememorizer.auth0.com/api/v2/",
-    responseType: "token id_token",
-    scope: "openid"
+    responseType: "code token id_token",
+    scope: "openid profile email",
   });
   constructor() {
     this.login = this.login.bind(this);

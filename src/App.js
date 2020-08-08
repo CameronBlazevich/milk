@@ -28,24 +28,25 @@ class App extends Component {
   static selectableGroupReference = null;
 
   saveHandRange = () => {
-    this.props.actions.updateHandRange({
+    this.props.handActions.updateHandRange({
       positionKey: this.props.selectedPositionKey,
       hands: this.props.selectedHands,
     });
   };
 
   checkAnswer = () => {
-    this.props.actions.checkAnswer();
+    this.props.handActions.checkAnswer();
   };
 
   reset = () => {
     this.refs.selectableGroup.clearSelection();
-    this.props.actions.reset();
+    this.props.handActions.reset();
   };
 
   handlePositionSelection = (positionCompositeKey) => {
     this.refs.selectableGroup.clearSelection();
     this.props.positionActions.positionSelectedForEdit(positionCompositeKey);
+    this.props.positionActions.getPosition(positionCompositeKey);
   };
 
   handleModeChange = (switchValue) => {
@@ -72,7 +73,7 @@ class App extends Component {
     if (selectedHandIds.length > 0) {
       this.refs.selectableGroup.clearSelection();
     }
-    this.props.actions.handsSelected(selectedHandIds);
+    this.props.handActions.handsSelected(selectedHandIds);
   };
 
   render() {
@@ -136,7 +137,7 @@ function mapStateToProps(state, ownProps) {
   return {
     selectedHands: state.selectedHands,
     handRanges: state.handRanges,
-    positions: state.positions,
+    position: state.position,
     selectedPositionKey: state.selectedPositionKey,
     mode: state.mode,
     quizResults: state.quizResults,
@@ -148,7 +149,7 @@ function mapStateToProps(state, ownProps) {
 }
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(handActions, dispatch),
+    handActions: bindActionCreators(handActions, dispatch),
     positionActions: bindActionCreators(positionActions, dispatch),
     modeActions: bindActionCreators(modeActions, dispatch),
     sliderActions: bindActionCreators(sliderActions, dispatch),

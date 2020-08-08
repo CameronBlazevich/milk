@@ -4,6 +4,7 @@ import authenticatedHandRangeApi from "../api/handRangeApi";
 import unauthenticatedHandRangeApi from "../api/mockHandRangeApi";
 import { handRangeUpdateSuccessNotification } from "../components/notifications/handRangeUpdateSuccessNotification";
 import { createNotification } from "react-redux-notify";
+import { getAuthToken } from "../api/getAuthToken";
 
 import Auth from "../services/authService";
 
@@ -51,17 +52,11 @@ export function loadHandRanges() {
   };
 }
 
-function getAuthToken(auth) {
-  const access_token = auth.getAccessToken();
-  const authBearer = "Bearer " + access_token;
-
-  return authBearer;
-}
-
 export function updateHandRange({ positionKey, hands }) {
   const auth = new Auth();
   const authBearer = getAuthToken(auth);
   return function (dispatch) {
+    debugger;
     dispatch(isLoading(ActionTypes.IS_UPDATING_HAND_RANGES, true));
     return handRangeApi
       .updateHandRange(positionKey, hands, authBearer)

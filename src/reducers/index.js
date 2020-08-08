@@ -1,6 +1,6 @@
 import notifications from "react-redux-notify";
 import selectedHands from "./handReducer";
-import positions from "./positionReducer";
+import position from "./positionReducer";
 import selectedPositionKey from "./selectedPositionReducer";
 import handRanges from "./handRangeReducer";
 import mode from "./modeReducer";
@@ -18,7 +18,7 @@ export default function rootReducer(state = initialState, action) {
     quizResults: quizResults(state, action),
     selectedHands: selectedHands(state, action),
     handRanges: handRanges(state.handRanges, action),
-    positions: positions(state.positions, action),
+    position: position(state.position, action),
     selectedPositionKey: selectedPositionKey(state.selectedPositionKey, action),
     mode: mode(state.mode, action),
     sliderValue: sliderValue(state.sliderValue, action),

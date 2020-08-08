@@ -34,13 +34,13 @@ function Login(props) {
             </UncontrolledDropdown>
           )}
           {!isAuthenticated() && (
-            <Button bsStyle="primary" className="btn-margin" onClick={login}>
+            <Button bsstyle="primary" className="btn-margin" onClick={login}>
               Log In
             </Button>
           )}
           {isAuthenticated() && (
             <Button
-              bsStyle="primary"
+              bsstyle="primary"
               className=" primary btn-margin"
               onClick={logout}
             >

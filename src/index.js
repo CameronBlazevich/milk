@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { Router, Route, Switch } from "react-router-dom";
 import configureStore from "./store/configureStore";
-import { loadPositions } from "./actions/positionActions";
 import { loadHandRanges } from "./actions/handActions";
 import { loadScenarios } from "./actions/scenarioActions";
 import App from "./App";
@@ -27,8 +26,6 @@ const handleAuthentication = (nextState, replace) => {
 };
 // const store = configureStore(initialState);
 const store = configureStore();
-// store.dispatch(loadPositions());
-//store.dispatch(loadHandRanges());
 
 ReactDOM.render(
   <Provider store={store}>
@@ -38,7 +35,7 @@ ReactDOM.render(
           exact
           path="/home"
           render={(props) => {
-            store.dispatch(loadHandRanges());
+            // store.dispatch(loadHandRanges());
             store.dispatch(loadScenarios());
             return <App {...props} />;
           }}

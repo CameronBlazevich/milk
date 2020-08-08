@@ -9,7 +9,7 @@ export default {
   selectedScenarioId: null,
   hasCheckedAnswer: false,
   selectedHands: [],
-  positions: [],
+  position: {},
   selectedPositionKey: 0,
   handRanges: [],
   mode: "PLAY",

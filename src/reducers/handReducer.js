@@ -5,8 +5,8 @@ import HandRankService from "../services/handRankService";
 export default function handReducer(state = initialState, action) {
   switch (action.type) {
     case ActionTypes.HANDS_SELECTED:
-      let currentlySelectedHands = [...state.selectedHands];
-      let incomingSelectedHands = [...action.handsSelected];
+      let currentlySelectedHands = [...(state.selectedHands || [])];
+      let incomingSelectedHands = [...(action.handsSelected || [])];
 
       let handsToBeUnselected = currentlySelectedHands.filter((x) =>
         incomingSelectedHands.includes(x)
@@ -31,15 +31,19 @@ export default function handReducer(state = initialState, action) {
       }
       return getHandsThatShouldBeSelected(state, state.selectedPositionKey);
 
-    case ActionTypes.POSITION_SELECTED_FOR_EDIT:
-      if (state.mode === "QUIZ") {
-        return [];
-      }
+    // case ActionTypes.POSITION_SELECTED_FOR_EDIT:
+    //   if (state.mode === "QUIZ") {
+    //     return [];
+    //   }
 
-      return getHandsFromHydratedScenarioThatShouldBeSelected(
-        state,
-        action.positionCompositeKey
-      );
+    //   return getHandsFromHydratedScenarioThatShouldBeSelected(
+    //     state,
+    //     action.positionCompositeKey
+    //   );
+
+    case ActionTypes.LOAD_POSITION_SUCCESS:
+      const handsForPosition = action.position.handRange.hands;
+      return handsForPosition;
 
     case ActionTypes.SLIDER_MOVED:
       let hands = HandRankService.getHandsByPercent(action.sliderValue);

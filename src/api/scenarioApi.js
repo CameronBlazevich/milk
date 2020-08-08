@@ -5,39 +5,39 @@ import delay from "./delay";
 // All calls return promises.
 const liteScenarios = [
   {
-    id: 0,
+    id: 1,
     displayName: "Open Opportunity",
     situations: [
       {
-        id: 0,
-        scenarioId: 0,
+        id: 1,
+        scenarioId: 1,
         displayName: "Unopened Pot",
         positions: [
           {
             key: "UTG",
-            situationId: 0,
+            situationId: 1,
             handRange: { hands: ["AAo"] },
           },
           {
             key: "HJ",
-            situationId: 0,
+            situationId: 1,
             handRange: { hands: ["AAo", "KKo", "QQo"] },
           },
           {
             key: "CO",
-            situationId: 0,
+            situationId: 1,
             handRange: { hands: ["AAo", "KKo", "QQo", "AKs", "AKo"] },
           },
           {
             key: "BTN",
-            situationId: 0,
+            situationId: 1,
             handRange: {
               hands: ["AAo", "KKo", "QQo", "AKs", "AKo", "AQs", "AQo", "JJo"],
             },
           },
           {
             key: "SB",
-            situationId: 0,
+            situationId: 1,
             handRange: [],
           },
         ],
@@ -45,46 +45,19 @@ const liteScenarios = [
     ],
   },
   {
-    id: 1,
+    id: 2,
     displayName: "3Bet Opportunity",
     situations: [
       {
-        id: 1,
-        scenarioId: 1,
+        id: 2,
+        scenarioId: 2,
         displayName: "UTG Open",
         positions: [
           {
             key: "HJ",
-            situationId: 1,
+            situationId: 2,
             handRange: [],
           },
-          {
-            key: "CO",
-            situationId: 1,
-            handRange: [],
-          },
-          {
-            key: "BTN",
-            situationId: 1,
-            handRange: [],
-          },
-          {
-            key: "SB",
-            situationId: 1,
-            handRange: [],
-          },
-          {
-            key: "BB",
-            situationId: 1,
-            handRange: [],
-          },
-        ],
-      },
-      {
-        id: 2,
-        scenarioId: 1,
-        displayName: "HJ Open",
-        positions: [
           {
             key: "CO",
             situationId: 2,
@@ -109,9 +82,14 @@ const liteScenarios = [
       },
       {
         id: 3,
-        scenarioId: 1,
-        displayName: "CO Open",
+        scenarioId: 2,
+        displayName: "HJ Open",
         positions: [
+          {
+            key: "CO",
+            situationId: 3,
+            handRange: [],
+          },
           {
             key: "BTN",
             situationId: 3,
@@ -131,9 +109,14 @@ const liteScenarios = [
       },
       {
         id: 4,
-        scenarioId: 1,
-        displayName: "BTN Open",
+        scenarioId: 2,
+        displayName: "CO Open",
         positions: [
+          {
+            key: "BTN",
+            situationId: 4,
+            handRange: [],
+          },
           {
             key: "SB",
             situationId: 4,
@@ -148,12 +131,29 @@ const liteScenarios = [
       },
       {
         id: 5,
-        scenarioId: 1,
+        scenarioId: 2,
+        displayName: "BTN Open",
+        positions: [
+          {
+            key: "SB",
+            situationId: 5,
+            handRange: [],
+          },
+          {
+            key: "BB",
+            situationId: 5,
+            handRange: [],
+          },
+        ],
+      },
+      {
+        id: 6,
+        scenarioId: 2,
         displayName: "SB Open",
         positions: [
           {
             key: "BB",
-            situationId: 5,
+            situationId: 6,
             handRange: [],
           },
         ],

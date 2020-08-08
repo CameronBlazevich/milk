@@ -12,6 +12,20 @@ class PositionApi {
       .then((response) => response.json())
       .then((data) => data.positions);
   }
+
+  static getPosition(authBearer, positionKey) {
+    var request = new Request(
+      apiBaseUrl +
+        `positions/?situationId=${positionKey.situationId}&positionKey=${positionKey.positionKey}`,
+      {
+        headers: {
+          Authorization: authBearer,
+        },
+        method: "GET",
+      }
+    );
+    return fetch(request).then((response) => response.json());
+  }
 }
 
 export default PositionApi;

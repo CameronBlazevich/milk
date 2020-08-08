@@ -20,8 +20,8 @@ class HandRangeApi {
       },
       method: "POST",
       body: JSON.stringify({
-        position: positionKey,
-        hands: hands,
+        positionKey,
+        hands,
       }),
     });
 
