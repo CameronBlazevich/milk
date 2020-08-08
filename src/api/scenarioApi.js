@@ -179,19 +179,6 @@ class ScenarioApi {
       .then((response) => response.json())
       .then((data) => data);
   }
-
-  static getHydratedScenario(id) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(
-          Object.assign(
-            [],
-            hydratedScenarios.find((s) => s.id === id)
-          )
-        );
-      }, delay);
-    });
-  }
 }
 
 export default ScenarioApi;
