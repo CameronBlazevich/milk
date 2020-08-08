@@ -20,7 +20,7 @@ class PositionSelector extends Component {
       const situationSubMenus = scenario.situations.map((situation) => {
         const positionMenuItems = situation.positions.map((position) => {
           return (
-            <Menu.Item key={`${scenario.id}-${situation.id}-${position.key}`}>
+            <Menu.Item key={`${scenario.id}-${situation.id}-${position.id}`}>
               {position.key}
             </Menu.Item>
           );
@@ -49,12 +49,12 @@ class PositionSelector extends Component {
           const splitKey = key.split("-");
           const scenarioId = parseInt(splitKey[0]);
           const situationId = parseInt(splitKey[1]);
-          const positionKey = splitKey[2];
+          const positionId = parseInt(splitKey[2]);
 
           const selectedPositionCompositeKey = {
             scenarioId,
             situationId,
-            positionKey,
+            positionId,
           };
 
           //DISPATCH THIS INFO
@@ -88,7 +88,7 @@ class PositionSelector extends Component {
     );
 
     const position = situation.positions.find(
-      (p) => p.key === this.props.selectedPositionKey.positionKey
+      (p) => p.id === this.props.selectedPositionKey.positionId
     );
 
     return (

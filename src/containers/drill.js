@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Row, Col } from "reactstrap";
 import PokerTable from "../components/drill/pokerTable";
-import RangeUpdater from "../components/RangeUpdater";
+import RangeUpdater from "../components/rangeUpdater";
 
 class Drill extends Component {
   render() {

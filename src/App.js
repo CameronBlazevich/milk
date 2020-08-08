@@ -11,7 +11,7 @@ import * as positionActions from "./actions/positionActions";
 import * as modeActions from "./actions/modeActions";
 import * as sliderActions from "./actions/sliderActions";
 import Auth from "./services/authService";
-import RangeUpdater from "./components/RangeUpdater";
+import RangeUpdater from "./components/rangeUpdater";
 import "./App.css";
 
 const auth = new Auth();
@@ -35,7 +35,7 @@ class App extends Component {
   handlePositionSelection = (positionCompositeKey) => {
     this.rangeUpdater.current.clearSelection();
     this.props.positionActions.positionSelectedForEdit(positionCompositeKey);
-    this.props.positionActions.getPosition(positionCompositeKey);
+    this.props.handActions.getHandRange(positionCompositeKey);
   };
 
   handleModeChange = (switchValue) => {

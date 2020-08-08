@@ -31,18 +31,11 @@ export default function handReducer(state = initialState, action) {
       }
       return getHandsThatShouldBeSelected(state, state.selectedPositionKey);
 
-    // case ActionTypes.POSITION_SELECTED_FOR_EDIT:
-    //   if (state.mode === "QUIZ") {
-    //     return [];
-    //   }
+    case ActionTypes.SAVE_HAND_RANGE_UPDATE_SUCCESS:
+      return action.handRange.hands;
 
-    //   return getHandsFromHydratedScenarioThatShouldBeSelected(
-    //     state,
-    //     action.positionCompositeKey
-    //   );
-
-    case ActionTypes.LOAD_POSITION_SUCCESS:
-      const handsForPosition = action.position.handRange.hands;
+    case ActionTypes.LOAD_HAND_RANGE_SUCCESS:
+      const handsForPosition = action.handRange.hands;
       return handsForPosition;
 
     case ActionTypes.SLIDER_MOVED:

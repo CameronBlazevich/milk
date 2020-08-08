@@ -54,7 +54,7 @@ ReactDOM.render(
           exact
           path="/drill"
           render={(props) => {
-            store.dispatch(loadScenarios());
+            // store.dispatch(loadUserScenarios());
             return <Drill {...props}></Drill>;
           }}
         ></Route>

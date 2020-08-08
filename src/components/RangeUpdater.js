@@ -39,7 +39,7 @@ class RangeUpdater extends Component {
   };
 
   saveHandRange = () => {
-    this.props.positionActions.updatePosition({
+    this.props.handActions.updateHandRange({
       positionKey: this.props.selectedPositionKey,
       hands: this.props.selectedHands,
     });

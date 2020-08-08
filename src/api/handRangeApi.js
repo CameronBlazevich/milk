@@ -11,6 +11,16 @@ class HandRangeApi {
     return fetch(request).then((response) => response.json());
   }
 
+  static getHandRange(authBearer, positionId) {
+    var request = new Request(apiBaseUrl + `handranges/${positionId}`, {
+      headers: {
+        Authorization: authBearer,
+      },
+      method: "GET",
+    });
+    return fetch(request).then((response) => response.json());
+  }
+
   static updateHandRange(positionKey, hands, authBearer) {
     var request = new Request(apiBaseUrl + "handRanges/", {
       headers: {
