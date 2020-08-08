@@ -26,6 +26,22 @@ class PositionApi {
     );
     return fetch(request).then((response) => response.json());
   }
+
+  static updatePosition(positionKey, hands, authBearer) {
+    const request = new Request(apiBaseUrl + "handRanges/", {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: authBearer,
+      },
+      method: "POST",
+      body: JSON.stringify({
+        positionKey,
+        hands,
+      }),
+    });
+    return fetch(request).then((response) => response.json());
+  }
 }
 
 export default PositionApi;

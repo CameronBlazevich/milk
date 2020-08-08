@@ -6,6 +6,9 @@ export default function positionReducer(state = initialState.position, action) {
     case ActionTypes.LOAD_POSITION_SUCCESS:
       return action.position;
 
+    case ActionTypes.SAVE_POSITION_UPDATE_SUCCESS:
+      return action.position;
+
     default:
       return state;
   }

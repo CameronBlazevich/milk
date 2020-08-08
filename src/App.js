@@ -28,7 +28,7 @@ class App extends Component {
   static selectableGroupReference = null;
 
   saveHandRange = () => {
-    this.props.handActions.updateHandRange({
+    this.props.positionActions.updatePosition({
       positionKey: this.props.selectedPositionKey,
       hands: this.props.selectedHands,
     });

@@ -2,8 +2,7 @@ import * as ActionTypes from "./actionTypes";
 import isLoading from "./isLoadingAction";
 import authenticatedHandRangeApi from "../api/handRangeApi";
 import unauthenticatedHandRangeApi from "../api/mockHandRangeApi";
-import { handRangeUpdateSuccessNotification } from "../components/notifications/handRangeUpdateSuccessNotification";
-import { createNotification } from "react-redux-notify";
+
 import { getAuthToken } from "../api/getAuthToken";
 
 import Auth from "../services/authService";
@@ -45,28 +44,6 @@ export function loadHandRanges() {
       .then((ranges) => {
         dispatch(loadHandRangesSuccess(ranges));
         dispatch(isLoading(ActionTypes.IS_LOADING_HAND_RANGES, false));
-      })
-      .catch((error) => {
-        throw error;
-      });
-  };
-}
-
-export function updateHandRange({ positionKey, hands }) {
-  const auth = new Auth();
-  const authBearer = getAuthToken(auth);
-  return function (dispatch) {
-    debugger;
-    dispatch(isLoading(ActionTypes.IS_UPDATING_HAND_RANGES, true));
-    return handRangeApi
-      .updateHandRange(positionKey, hands, authBearer)
-      .then((savedHandRange) => {
-        dispatch({
-          type: ActionTypes.SAVE_HAND_RANGE_SUCCESS,
-          handRange: savedHandRange,
-        });
-        dispatch(isLoading(ActionTypes.IS_UPDATING_HAND_RANGES, false));
-        dispatch(createNotification(handRangeUpdateSuccessNotification));
       })
       .catch((error) => {
         throw error;

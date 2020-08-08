@@ -4,6 +4,8 @@ import authenticatedPositionsApi from "../api/positionApi";
 import isLoading from "./isLoadingAction";
 import Auth from "../services/authService";
 import { getAuthToken } from "../api/getAuthToken";
+import { createNotification } from "react-redux-notify";
+import { handRangeUpdateSuccessNotification } from "../components/notifications/handRangeUpdateSuccessNotification";
 
 let positionsApi = unAuthenticatedPositionsApi;
 
@@ -39,4 +41,30 @@ export function getPosition(positionKey) {
 
 export function loadPositionSuccess(position) {
   return { type: ActionTypes.LOAD_POSITION_SUCCESS, position };
+}
+
+export function updatePosition({ positionKey, hands }) {
+  const auth = new Auth();
+  const authBearer = getAuthToken(auth);
+  if (auth.isAuthenticated()) {
+    positionsApi = authenticatedPositionsApi;
+  } else {
+    positionsApi = unAuthenticatedPositionsApi;
+  }
+  return function (dispatch) {
+    dispatch(isLoading(ActionTypes.IS_UPDATING_HAND_RANGES, true));
+    return positionsApi
+      .updatePosition(positionKey, hands, authBearer)
+      .then((position) => {
+        dispatch({
+          type: ActionTypes.SAVE_POSITION_UPDATE_SUCCESS,
+          position,
+        });
+        dispatch(isLoading(ActionTypes.IS_UPDATING_HAND_RANGES, false));
+        dispatch(createNotification(handRangeUpdateSuccessNotification));
+      })
+      .catch((error) => {
+        throw error;
+      });
+  };
 }
