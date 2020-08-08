@@ -16,6 +16,7 @@ import * as modeActions from "./actions/modeActions";
 import * as sliderActions from "./actions/sliderActions";
 import Auth from "./services/authService";
 import { SelectableGroup } from "react-selectable-fast";
+import RangeUpdater from "./components/RangeUpdater";
 import "./App.css";
 
 const auth = new Auth();
@@ -24,56 +25,29 @@ class App extends Component {
   // eslint-disable-next-line
   constructor(props) {
     super(props);
+    this.rangeUpdater = React.createRef();
   }
-  static selectableGroupReference = null;
-
-  saveHandRange = () => {
-    this.props.positionActions.updatePosition({
-      positionKey: this.props.selectedPositionKey,
-      hands: this.props.selectedHands,
-    });
-  };
 
   checkAnswer = () => {
     this.props.handActions.checkAnswer();
   };
 
   reset = () => {
-    this.refs.selectableGroup.clearSelection();
+    this.rangeUpdater.current.clearSelection();
     this.props.handActions.reset();
   };
 
   handlePositionSelection = (positionCompositeKey) => {
-    this.refs.selectableGroup.clearSelection();
+    this.rangeUpdater.current.clearSelection();
     this.props.positionActions.positionSelectedForEdit(positionCompositeKey);
     this.props.positionActions.getPosition(positionCompositeKey);
   };
 
   handleModeChange = (switchValue) => {
-    this.refs.selectableGroup.clearSelection();
+    this.rangeUpdater.current.clearSelection();
     //get which mode we're in, adjust accordingly
     console.log(switchValue);
     this.props.modeActions.modeChanged(this.props, switchValue);
-  };
-
-  sliderMoving = (value) => {
-    //this.props.sliderActions.sliderMoving(value);
-  };
-
-  sliderMoved = (value) => {
-    this.refs.selectableGroup.selectedItems = new Set();
-    this.props.sliderActions.sliderMoved(value);
-  };
-
-  selectHands = (selection) => {
-    let selectedHandIds = selection.map((selectedItem) => {
-      return selectedItem.node.id;
-    });
-
-    if (selectedHandIds.length > 0) {
-      this.refs.selectableGroup.clearSelection();
-    }
-    this.props.handActions.handsSelected(selectedHandIds);
   };
 
   render() {
@@ -89,42 +63,7 @@ class App extends Component {
             ></ScenarioSelector>
           </div>
           <div className="col-md-8">
-            <div className="row">
-              <SelectableGroup
-                ref={"selectableGroup"}
-                tolerance={1}
-                className="main"
-                clickClassName="tick"
-                enableDeselect
-                allowClickWithoutSelected={true}
-                //duringSelection={() => console.log("selecting...")}
-                onSelectionFinish={this.selectHands}
-                // ignoreList={['.not-selectable', '.item:nth-child(10)', '.item:nth-child(27)']}
-              >
-                <HandGrid
-                  selectedHands={this.props.selectedHands}
-                  quizResults={this.props.quizResults}
-                  selectableGroupReference={this.refs.selectableGroup}
-                />
-              </SelectableGroup>
-            </div>
-            <div className="row">
-              <div className="col-md-offset-2 col-md-8">
-                <SliderWithToolTip
-                  value={this.props.sliderValue}
-                  onAfterChange={this.sliderMoved}
-                  onChange={this.sliderMoving}
-                />
-              </div>
-              <div className="pull-left">{this.props.sliderValue + "%"}</div>
-            </div>
-            <div className="row center">
-              {/* <GameModeSelector></GameModeSelector> */}
-              <UpdateRangeButton
-                isLoading={this.props.isLoading}
-                saveHandRange={this.saveHandRange}
-              />
-            </div>
+            <RangeUpdater ref={this.rangeUpdater}></RangeUpdater>
           </div>
           {this.props.quizResults.hasCheckedAnswer && <GridLegend />}
         </div>
