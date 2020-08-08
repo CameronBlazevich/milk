@@ -16,8 +16,8 @@ export function loadHydratedScenarioSuccess(hydratedScenario) {
 
 export function getHydratedScenario(scenarioId) {
   console.log("getting hydrated scenario with id: " + scenarioId);
-  return function(dispatch) {
-    scenarioApi.getHydratedScenario(scenarioId).then(hydratedScenario => {
+  return function (dispatch) {
+    scenarioApi.getHydratedScenario(scenarioId).then((hydratedScenario) => {
       dispatch(loadHydratedScenarioSuccess(hydratedScenario));
     });
   };
@@ -26,13 +26,13 @@ export function getHydratedScenario(scenarioId) {
 export function loadScenarios() {
   //dispatch(isLoadingPositions(true));
 
-  return function(dispatch) {
+  return function (dispatch) {
     return scenarioApi
       .getAllScenarios()
-      .then(scenarios => {
+      .then((scenarios) => {
         dispatch(loadScenariosSuccess(scenarios));
       })
-      .catch(error => {
+      .catch((error) => {
         throw error;
       });
   };

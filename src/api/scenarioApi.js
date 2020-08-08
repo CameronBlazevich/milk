@@ -1,4 +1,5 @@
 import delay from "./delay";
+import { apiBaseUrl } from "../common/apiConstants";
 
 // This file mocks a web API by working with the hard-coded data below.
 // It uses setTimeout to simulate the delay of an AJAX call.
@@ -167,12 +168,16 @@ const liteScenarios = [
 ];
 
 class ScenarioApi {
-  static getAllScenarios() {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(Object.assign([], liteScenarios));
-      }, delay);
+  static getAllScenarios(id_token) {
+    var request = new Request(apiBaseUrl + "scenarios/", {
+      headers: {
+        Authorization: "Bearer " + id_token,
+      },
+      method: "GET",
     });
+    return fetch(request)
+      .then((response) => response.json())
+      .then((data) => data);
   }
 
   static getHydratedScenario(id) {
