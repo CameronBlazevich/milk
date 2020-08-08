@@ -18,7 +18,7 @@ function Login(props) {
         <NavbarBrand>
           <span href="#">Hand Range Memorizer</span>
         </NavbarBrand>
-        <Nav pullRight>
+        <Nav className="pull-right">
           {isAuthenticated() && (
             <UncontrolledDropdown
               nav

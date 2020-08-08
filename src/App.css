@@ -104,3 +104,43 @@
     transform: rotate(360deg);
   }
 }
+
+.poker-table {
+  margin: 20px;
+  padding: 15px;
+  height: 400px;
+  width: 775px;
+  background-color: darkcyan;
+  /* border: 1px solid black; */
+  border-radius: 150px;
+}
+
+.poker-table-row {
+  /* border: 1px solid grey; */
+  position: relative;
+}
+
+.poker-table-row-end {
+  height: 15%;
+}
+
+.poker-table-row-middle {
+  height: 40%;
+}
+
+.poker-seat {
+  height: 50px;
+  width: 150px;
+  border: 1px solid black;
+  border-radius: 25px;
+  background-color: cornflowerblue;
+  display: inline-block;
+}
+
+.seat-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}

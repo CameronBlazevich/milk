@@ -6,6 +6,7 @@ import configureStore from "./store/configureStore";
 import { loadHandRanges } from "./actions/handActions";
 import { loadScenarios } from "./actions/scenarioActions";
 import App from "./App";
+import Drill from "./containers/drill";
 import Callback from "./Callback";
 import Auth from "./services/authService";
 import history from "./history";
@@ -49,6 +50,14 @@ ReactDOM.render(
             return <App {...props} />;
           }}
         />
+        <Route
+          exact
+          path="/drill"
+          render={(props) => {
+            store.dispatch(loadScenarios());
+            return <Drill {...props}></Drill>;
+          }}
+        ></Route>
         <Route
           path="/callback"
           render={(props) => {

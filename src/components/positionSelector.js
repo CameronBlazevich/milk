@@ -7,7 +7,7 @@ import { DownOutlined } from "@ant-design/icons";
 import "../ScenarioPage.css";
 import "antd/dist/antd.css";
 
-class ScenarioSelector extends Component {
+class PositionSelector extends Component {
   // eslint-disable-next-line
   constructor(props) {
     super(props);
@@ -130,4 +130,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ScenarioSelector);
+export default connect(mapStateToProps, mapDispatchToProps)(PositionSelector);

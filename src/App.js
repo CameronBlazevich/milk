@@ -1,13 +1,9 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import GameModeSelector from "./components/gameModeSelector";
 import { Notify } from "react-redux-notify";
-import HandGrid from "./components/handGrid";
-import ScenarioSelector from "./components/scenarioSelector";
-import UpdateRangeButton from "./components/submitOrUpdateButton";
+import PositionSelector from "./components/positionSelector";
 import GridLegend from "./components/gridLegend";
-import SliderWithToolTip from "./components/slider";
 import Login from "./components/login";
 import UnauthenticatedWarningMessage from "./components/unauthenticatedWarningMessage";
 import * as handActions from "./actions/handActions";
@@ -15,7 +11,6 @@ import * as positionActions from "./actions/positionActions";
 import * as modeActions from "./actions/modeActions";
 import * as sliderActions from "./actions/sliderActions";
 import Auth from "./services/authService";
-import { SelectableGroup } from "react-selectable-fast";
 import RangeUpdater from "./components/RangeUpdater";
 import "./App.css";
 
@@ -58,9 +53,9 @@ class App extends Component {
         {!auth.isAuthenticated() && <UnauthenticatedWarningMessage />}
         <div className="row">
           <div className="col-md-2">
-            <ScenarioSelector
+            <PositionSelector
               onItemSelect={this.handlePositionSelection}
-            ></ScenarioSelector>
+            ></PositionSelector>
           </div>
           <div className="col-md-8">
             <RangeUpdater ref={this.rangeUpdater}></RangeUpdater>
