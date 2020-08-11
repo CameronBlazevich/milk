@@ -7,6 +7,7 @@ import HandGrid from "./handGrid";
 import { connect } from "react-redux";
 import * as positionActions from "../actions/positionActions";
 import * as handActions from "../actions/handActions";
+import * as sliderActions from "../actions/sliderActions";
 
 class RangeUpdater extends Component {
   // eslint-disable-next-line
@@ -60,7 +61,7 @@ class RangeUpdater extends Component {
           >
             <HandGrid
               selectedHands={this.props.selectedHands}
-              quizResults={this.props.quizResults}
+              quizResults={this.props.quiz}
               selectableGroupReference={this.refs.selectableGroup}
             />
           </SelectableGroup>
@@ -94,7 +95,7 @@ function mapStateToProps(state, ownProps) {
     position: state.position,
     selectedPositionKey: state.selectedPositionKey,
     mode: state.mode,
-    quizResults: state.quizResults,
+    quiz: state.quiz,
     sliderValue: state.sliderValue,
     auth: state.auth,
     selectedScenarioId: state.selectedScenarioId,
@@ -105,6 +106,7 @@ function mapDispatchToProps(dispatch) {
   return {
     positionActions: bindActionCreators(positionActions, dispatch),
     handActions: bindActionCreators(handActions, dispatch),
+    sliderActions: bindActionCreators(sliderActions, dispatch),
   };
 }
 

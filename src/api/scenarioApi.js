@@ -1,6 +1,5 @@
 import delay from "./delay";
 import { apiBaseUrl } from "../common/apiConstants";
-
 // This file mocks a web API by working with the hard-coded data below.
 // It uses setTimeout to simulate the delay of an AJAX call.
 // All calls return promises.
@@ -172,6 +171,18 @@ class ScenarioApi {
     var request = new Request(apiBaseUrl + "scenarios/", {
       headers: {
         Authorization: "Bearer " + id_token,
+      },
+      method: "GET",
+    });
+    return fetch(request)
+      .then((response) => response.json())
+      .then((data) => data);
+  }
+
+  static getUserScenarios(authBearer) {
+    var request = new Request(apiBaseUrl + "scenarios/GetUserScenarios", {
+      headers: {
+        Authorization: authBearer,
       },
       method: "GET",
     });

@@ -1,10 +1,8 @@
 import React, { Component } from "react";
-import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import * as positionActions from "../actions/positionActions";
 import { Menu, Dropdown } from "antd";
 import { DownOutlined } from "@ant-design/icons";
-import "../ScenarioPage.css";
+import "../../ScenarioPage.css";
 import "antd/dist/antd.css";
 
 class PositionSelector extends Component {
@@ -112,12 +110,6 @@ class PositionSelector extends Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    // selectedHands: state.selectedHands,
-    // handRanges: state.handRanges,
-    // positions: state.positions,
-    // mode: state.mode,
-    // quizResults: state.quizResults,
-    // sliderValue: state.sliderValue,
     auth: state.auth,
     isLoading: state.isLoading,
     scenarios: state.scenarios,
@@ -125,9 +117,7 @@ function mapStateToProps(state, ownProps) {
   };
 }
 function mapDispatchToProps(dispatch) {
-  return {
-    positionActions: bindActionCreators(positionActions, dispatch),
-  };
+  return {};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PositionSelector);

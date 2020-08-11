@@ -1,8 +1,14 @@
 export default {
-  quizResults: {
-    correctlySelectedHands: [],
-    incorrectlySelectedHands: [],
-    handsThatShouldHaveBeenSelectedButWerent: [],
+  quiz: {
+    scenarioIds: [],
+    quizKey: {
+      scenarioId: null,
+      situationId: null,
+      positionId: null,
+    },
+    position: { handRange: { hands: [] } },
+    situation: {},
+    userScenarios: [],
     hasCheckedAnswer: false,
   },
   scenarios: [],

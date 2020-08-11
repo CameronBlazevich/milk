@@ -3,17 +3,17 @@ import { createSelectable } from "react-selectable-fast";
 
 function getClassForHand(quizResults, selectedHands, hand) {
   let className = "hand ";
-  if (quizResults.correctlySelectedHands.includes(hand)) {
-    return className + "correctlySelected";
-  }
+  // if (quizResults.correctlySelectedHands.includes(hand)) {
+  //   return className + "correctlySelected";
+  // }
 
-  if (quizResults.incorrectlySelectedHands.includes(hand)) {
-    return className + "incorrectlySelected";
-  }
+  // if (quizResults.incorrectlySelectedHands.includes(hand)) {
+  //   return className + "incorrectlySelected";
+  // }
 
-  if (quizResults.handsThatShouldHaveBeenSelectedButWerent.includes(hand)) {
-    return className + "shouldHaveBeenSelected";
-  }
+  // if (quizResults.handsThatShouldHaveBeenSelectedButWerent.includes(hand)) {
+  //   return className + "shouldHaveBeenSelected";
+  // }
 
   if (selectedHands && selectedHands.includes(hand)) {
     return className + "selected";

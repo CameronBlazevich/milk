@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Notify } from "react-redux-notify";
-import PositionSelector from "./components/positionSelector";
+import PositionSelector from "./components/selectors/positionSelector";
 import GridLegend from "./components/gridLegend";
 import Login from "./components/login";
 import UnauthenticatedWarningMessage from "./components/unauthenticatedWarningMessage";
@@ -60,7 +60,6 @@ class App extends Component {
           <div className="col-md-8">
             <RangeUpdater ref={this.rangeUpdater}></RangeUpdater>
           </div>
-          {this.props.quizResults.hasCheckedAnswer && <GridLegend />}
         </div>
       </div>
     );
@@ -74,7 +73,6 @@ function mapStateToProps(state, ownProps) {
     position: state.position,
     selectedPositionKey: state.selectedPositionKey,
     mode: state.mode,
-    quizResults: state.quizResults,
     sliderValue: state.sliderValue,
     auth: state.auth,
     selectedScenarioId: state.selectedScenarioId,

@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import { Router, Route, Switch } from "react-router-dom";
 import configureStore from "./store/configureStore";
 import { loadHandRanges } from "./actions/handActions";
-import { loadScenarios } from "./actions/scenarioActions";
+import { loadScenarios, loadUserScenarios } from "./actions/scenarioActions";
 import App from "./App";
 import Drill from "./containers/drill";
 import Callback from "./Callback";
@@ -54,7 +54,7 @@ ReactDOM.render(
           exact
           path="/drill"
           render={(props) => {
-            // store.dispatch(loadUserScenarios());
+            store.dispatch(loadUserScenarios());
             return <Drill {...props}></Drill>;
           }}
         ></Route>

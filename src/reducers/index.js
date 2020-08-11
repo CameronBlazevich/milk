@@ -3,7 +3,7 @@ import selectedHands from "./handReducer";
 import selectedPositionKey from "./selectedPositionReducer";
 import handRanges from "./handRangeReducer";
 import mode from "./modeReducer";
-import quizResults from "./quizResultsReducer";
+import quiz from "./quizReducer";
 import sliderValue from "./sliderReducer";
 import auth from "./authReducer";
 import isLoading from "./isLoadingReducer";
@@ -13,7 +13,7 @@ import initialState from "./initialState";
 
 export default function rootReducer(state = initialState, action) {
   return {
-    quizResults: quizResults(state, action),
+    quiz: quiz(state.quiz, action),
     selectedHands: selectedHands(state, action),
     handRanges: handRanges(state.handRanges, action),
     selectedPositionKey: selectedPositionKey(state.selectedPositionKey, action),
