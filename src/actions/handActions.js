@@ -23,10 +23,6 @@ export function handsSelected(handsSelected) {
   return { type: ActionTypes.HANDS_SELECTED, handsSelected };
 }
 
-export function checkAnswer() {
-  return { type: ActionTypes.CHECK_ANSWER };
-}
-
 export function loadHandRangesSuccess(handRanges) {
   return { type: ActionTypes.LOAD_HAND_RANGES_SUCCESS, handRanges };
 }

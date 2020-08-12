@@ -14,16 +14,20 @@ export default function quizReducer(state = initialState.quiz, action) {
         state,
         { quizKey: action.quizKey },
         { position: action.position },
-        { situation: action.situation }
+        { situation: action.situation },
+        { hand: action.hand },
+        { hasAnswered: false },
+        { guess: "" }
       );
 
     case ActionTypes.LOAD_USER_SCENARIOS_SUCCESS:
       return Object.assign({}, state, { userScenarios: action.scenarios });
 
-    case ActionTypes.CHECK_ANSWER:
-      return {
-        hasCheckedAnswer: true,
-      };
+    case ActionTypes.QUIZ_ANSWERED:
+      return Object.assign({}, state, {
+        hasAnswered: true,
+        guess: action.actionChosen,
+      });
 
     case ActionTypes.RESET:
       return initialState.quiz;

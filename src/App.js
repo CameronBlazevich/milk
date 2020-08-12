@@ -23,10 +23,6 @@ class App extends Component {
     this.rangeUpdater = React.createRef();
   }
 
-  checkAnswer = () => {
-    this.props.handActions.checkAnswer();
-  };
-
   reset = () => {
     this.rangeUpdater.current.clearSelection();
     this.props.handActions.reset();

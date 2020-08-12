@@ -11,7 +11,7 @@ function HandGridRow(props) {
       columnCard={card}
       rowCard={props.rowCard}
       selectedHands={props.selectedHands}
-      quizResults={props.quizResults}
+      quiz={props.quiz}
       selectableRef={props.selectableRef}
     />
   ));

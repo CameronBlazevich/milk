@@ -57,14 +57,18 @@
   cursor: pointer;
 }
 .selected {
-  background-color: #5bc0de;
+  background-color: #62daff;
 }
 
-.correctlySelected {
-  background-color: #5bc0de;
+.correct {
+  background-color: #08b83d;
 }
 
-.incorrectlySelected {
+.quized-hand {
+  background-color: orange;
+}
+
+.incorrect {
   background-color: #d9534f;
 }
 
@@ -136,7 +140,7 @@
 }
 
 .poker-table-row-middle {
-  height: 40%;
+  height: 35%;
 }
 
 .poker-seat {
@@ -201,4 +205,32 @@
 .chip-area.open {
   border-radius: 0px;
   background-color: white;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.text-align-right {
+  text-align: right;
+}
+
+.action-button {
+  margin: 5px;
+}
+
+.reset-button {
+  width: 90%;
+}
+
+div.playing-card {
+  margin: 5px;
+  height: 100px;
+  width: 66px;
+  display: inline-block;
+}
+
+.card-svg {
+  height: 100%;
+  width: 100%;
 }

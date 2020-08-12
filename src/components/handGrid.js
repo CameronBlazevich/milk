@@ -11,7 +11,7 @@ function CardGrid(props) {
           row={index}
           rowCard={card}
           selectedHands={props.selectedHands}
-          quizResults={props.quizResults}
+          quiz={props.quiz}
         />
       ))}
     </div>

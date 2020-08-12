@@ -1,12 +1,26 @@
 import React from "react";
 import { createSelectable } from "react-selectable-fast";
 
-function getClassForHand(quizResults, selectedHands, hand) {
+function getClassForHand(quiz, selectedHands, hand) {
   let className = "hand ";
-  // if (quizResults.correctlySelectedHands.includes(hand)) {
-  //   return className + "correctlySelected";
-  // }
 
+  if (quiz.hand === hand) {
+    if (quiz.position.handRange.hands.includes(quiz.hand)) {
+      if (quiz.guess === "fold") {
+        return className + "incorrect";
+      }
+
+      if (quiz.guess === "raise") {
+        return className + "correct";
+      }
+    }
+
+    if (quiz.guess === "fold") {
+      return className + "correct";
+    }
+
+    return className + "quized-hand";
+  }
   // if (quizResults.incorrectlySelectedHands.includes(hand)) {
   //   return className + "incorrectlySelected";
   // }
@@ -30,11 +44,7 @@ function Hand(props) {
     handText = `${props.columnCard + props.rowCard}o`;
   }
 
-  let className = getClassForHand(
-    props.quizResults,
-    props.selectedHands,
-    handText
-  );
+  let className = getClassForHand(props.quiz, props.selectedHands, handText);
 
   return (
     <div id={handText} className={className} ref={props.selectableRef}>

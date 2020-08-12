@@ -1,4 +1,4 @@
-const hands = [
+export const hands = [
   "AAo",
   "KKo",
   "QQo",
@@ -167,7 +167,7 @@ const hands = [
   "92o",
   "83o",
   "82o",
-  "72o"
+  "72o",
 ];
 
 class HandRankService {

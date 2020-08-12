@@ -61,7 +61,7 @@ class RangeUpdater extends Component {
           >
             <HandGrid
               selectedHands={this.props.selectedHands}
-              quizResults={this.props.quiz}
+              quiz={this.props.quiz}
               selectableGroupReference={this.refs.selectableGroup}
             />
           </SelectableGroup>
@@ -90,10 +90,14 @@ class RangeUpdater extends Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    selectedHands: state.selectedHands,
+    selectedHands: ownProps.isQuiz
+      ? state.quiz.position.handRange.hands
+      : state.selectedHands,
     handRanges: state.handRanges,
     position: state.position,
-    selectedPositionKey: state.selectedPositionKey,
+    selectedPositionKey: ownProps.isQuiz
+      ? state.quiz.quizKey
+      : state.selectedPositionKey,
     mode: state.mode,
     quiz: state.quiz,
     sliderValue: state.sliderValue,
