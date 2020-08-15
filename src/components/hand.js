@@ -19,6 +19,10 @@ function getClassForHand(quiz, selectedHands, hand) {
       return className + "correct";
     }
 
+    if (quiz.guess === "raise") {
+      return className + "incorrect";
+    }
+
     return className + "quized-hand";
   }
   // if (quizResults.incorrectlySelectedHands.includes(hand)) {
