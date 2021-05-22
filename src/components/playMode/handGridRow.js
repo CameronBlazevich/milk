@@ -3,6 +3,7 @@ import Hand from "./hand";
 import { CardArray } from "../../common/cardArray";
 
 function HandGridRow(props) {
+  //console.log(props)
   const row = CardArray.map((card, index) => (
     <Hand
       key={index}

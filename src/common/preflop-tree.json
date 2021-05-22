@@ -1,0 +1,521 @@
+{
+    "UTG Fold": [
+        {
+            "HJ Fold": [
+                {
+                    "CO Fold": [
+                        {
+                            "BTN Fold": [
+                                {
+                                    "SB Fold": []
+                                },
+                                {
+                                    "SB Call": [
+                                        {
+                                            "BB Check": []
+                                        },
+                                        {
+                                            "BB Raise": [
+                                                {
+                                                    "SB Fold": []
+                                                },
+                                                {
+                                                    "SB Call": []
+                                                },
+                                                {
+                                                    "SB Raise": [
+                                                        {
+                                                            "BB Fold": []
+                                                        },
+                                                        {
+                                                            "BB Call": []
+                                                        },
+                                                        {
+                                                            "BB Raise": [
+                                                                {
+                                                                    "SB Fold": []
+                                                                },
+                                                                {
+                                                                    "SB Call": []
+                                                                },
+                                                                {
+                                                                    "SB Raise": [
+                                                                        {
+                                                                            "BB Fold": []
+                                                                        },
+                                                                        {
+                                                                            "BB Call": []
+                                                                        },
+                                                                        {
+                                                                            "BB Raise:": [
+                                                                                {
+                                                                                    "SB Fold": []
+                                                                                },
+                                                                                {
+                                                                                    "SB Call": []
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "SB Raise": [
+                                        {
+                                            "BB Fold": []
+                                        },
+                                        {
+                                            "BB Call": []
+                                        },
+                                        {
+                                            "BB Raise": [
+                                                {
+                                                    "SB Fold": []
+                                                },
+                                                {
+                                                    "SB Call": []
+                                                },
+                                                {
+                                                    "SB Raise": [
+                                                        {
+                                                            "BB Fold": []
+                                                        },
+                                                        {
+                                                            "BB Call": []
+                                                        },
+                                                        {
+                                                            "BB Raise": [
+                                                                {
+                                                                    "SB Fold": []
+                                                                },
+                                                                {
+                                                                    "SB Call": []
+                                                                },
+                                                                {
+                                                                    "SB Raise": [
+                                                                        {
+                                                                            "BB Fold": []
+                                                                        },
+                                                                        {
+                                                                            "BB Call": []
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "BTN Call": [
+                                {
+                                    "SB Fold": [
+                                        {
+                                            "BB Check": []
+                                        },
+                                        {
+                                            "BB Raise": [
+                                                {
+                                                    "BTN Fold": []
+                                                },
+                                                {
+                                                    "BTN Call": []
+                                                },
+                                                {
+                                                    "BTN Raise": ""
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "SB Call": ""
+                                },
+                                {
+                                    "SB Raise": ""
+                                }
+                            ]
+                        },
+                        {
+                            "BTN Raise": [
+                                {
+                                    "SB Fold": ""
+                                },
+                                {
+                                    "SB Call": ""
+                                },
+                                {
+                                    "SB Raise": ""
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "CO Call": [
+                        {
+                            "BTN Fold": [
+                                {
+                                    "SB Fold": ""
+                                },
+                                {
+                                    "SB Call": ""
+                                },
+                                {
+                                    "SB Raise": ""
+                                }
+                            ]
+                        },
+                        {
+                            "BTN Call": [
+                                {
+                                    "SB Fold": ""
+                                },
+                                {
+                                    "SB Call": ""
+                                },
+                                {
+                                    "SB Raise": ""
+                                }
+                            ]
+                        },
+                        {
+                            "BTN Raise": [
+                                {
+                                    "SB Fold": ""
+                                },
+                                {
+                                    "SB Call": ""
+                                },
+                                {
+                                    "SB Raise": ""
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "CO Raise": [
+                        {
+                            "BTN Fold": [
+                                {
+                                    "SB Fold": ""
+                                },
+                                {
+                                    "SB Call": ""
+                                },
+                                {
+                                    "SB Raise": ""
+                                }
+                            ]
+                        },
+                        {
+                            "BTN Call": [
+                                {
+                                    "SB Fold": ""
+                                },
+                                {
+                                    "SB Call": ""
+                                },
+                                {
+                                    "SB Raise": ""
+                                }
+                            ]
+                        },
+                        {
+                            "BTN Raise": [
+                                {
+                                    "SB Fold": ""
+                                },
+                                {
+                                    "SB Call": ""
+                                },
+                                {
+                                    "SB Raise": ""
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "HJ Call": [
+                {
+                    "CO Fold": [
+                        {
+                            "BTN Fold": [
+                                {
+                                    "SB Fold": ""
+                                },
+                                {
+                                    "SB Call": ""
+                                },
+                                {
+                                    "SB Raise": ""
+                                }
+                            ]
+                        },
+                        {
+                            "BTN Call": [
+                                {
+                                    "SB Fold": ""
+                                },
+                                {
+                                    "SB Call": ""
+                                },
+                                {
+                                    "SB Raise": ""
+                                }
+                            ]
+                        },
+                        {
+                            "BTN Raise": [
+                                {
+                                    "SB Fold": ""
+                                },
+                                {
+                                    "SB Call": ""
+                                },
+                                {
+                                    "SB Raise": ""
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "CO Call": [
+                        {
+                            "BTN Fold": [
+                                {
+                                    "SB Fold": ""
+                                },
+                                {
+                                    "SB Call": ""
+                                },
+                                {
+                                    "SB Raise": ""
+                                }
+                            ]
+                        },
+                        {
+                            "BTN Call": [
+                                {
+                                    "SB Fold": ""
+                                },
+                                {
+                                    "SB Call": ""
+                                },
+                                {
+                                    "SB Raise": ""
+                                }
+                            ]
+                        },
+                        {
+                            "BTN Raise": [
+                                {
+                                    "SB Fold": ""
+                                },
+                                {
+                                    "SB Call": ""
+                                },
+                                {
+                                    "SB Raise": ""
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "CO Raise": [
+                        {
+                            "BTN Fold": [
+                                {
+                                    "SB Fold": ""
+                                },
+                                {
+                                    "SB Call": ""
+                                },
+                                {
+                                    "SB Raise": ""
+                                }
+                            ]
+                        },
+                        {
+                            "BTN Call": [
+                                {
+                                    "SB Fold": ""
+                                },
+                                {
+                                    "SB Call": ""
+                                },
+                                {
+                                    "SB Raise": ""
+                                }
+                            ]
+                        },
+                        {
+                            "BTN Raise": [
+                                {
+                                    "SB Fold": ""
+                                },
+                                {
+                                    "SB Call": ""
+                                },
+                                {
+                                    "SB Raise": ""
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "HJ Raise": [
+                {
+                    "CO Fold": [
+                        {
+                            "BTN Fold": [
+                                {
+                                    "SB Fold": ""
+                                },
+                                {
+                                    "SB Call": ""
+                                },
+                                {
+                                    "SB Raise": ""
+                                }
+                            ]
+                        },
+                        {
+                            "BTN Call": [
+                                {
+                                    "SB Fold": ""
+                                },
+                                {
+                                    "SB Call": ""
+                                },
+                                {
+                                    "SB Raise": ""
+                                }
+                            ]
+                        },
+                        {
+                            "BTN Raise": [
+                                {
+                                    "SB Fold": ""
+                                },
+                                {
+                                    "SB Call": ""
+                                },
+                                {
+                                    "SB Raise": ""
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "CO Call": [
+                        {
+                            "BTN Fold": [
+                                {
+                                    "SB Fold": ""
+                                },
+                                {
+                                    "SB Call": ""
+                                },
+                                {
+                                    "SB Raise": ""
+                                }
+                            ]
+                        },
+                        {
+                            "BTN Call": [
+                                {
+                                    "SB Fold": ""
+                                },
+                                {
+                                    "SB Call": ""
+                                },
+                                {
+                                    "SB Raise": ""
+                                }
+                            ]
+                        },
+                        {
+                            "BTN Raise": [
+                                {
+                                    "SB Fold": ""
+                                },
+                                {
+                                    "SB Call": ""
+                                },
+                                {
+                                    "SB Raise": ""
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "CO Raise": [
+                        {
+                            "BTN Fold": [
+                                {
+                                    "SB Fold": ""
+                                },
+                                {
+                                    "SB Call": ""
+                                },
+                                {
+                                    "SB Raise": ""
+                                }
+                            ]
+                        },
+                        {
+                            "BTN Call": [
+                                {
+                                    "SB Fold": ""
+                                },
+                                {
+                                    "SB Call": ""
+                                },
+                                {
+                                    "SB Raise": ""
+                                }
+                            ]
+                        },
+                        {
+                            "BTN Raise": [
+                                {
+                                    "SB Fold": ""
+                                },
+                                {
+                                    "SB Call": ""
+                                },
+                                {
+                                    "SB Raise": ""
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
