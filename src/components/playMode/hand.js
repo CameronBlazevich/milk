@@ -1,9 +1,7 @@
 import React from "react";
 
 function getHandBackground(selectedHands, hand) {
-  //console.log(selectedHands);
   const correspondingHand = selectedHands.find(h => h.hand === hand);
-  //console.log(correspondingHand)
 
   let raiseFreq, callFreq, foldFreq;
   if (correspondingHand) {

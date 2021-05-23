@@ -3,7 +3,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Notify } from "react-redux-notify";
 import PositionSelector from "../components/selectors/positionSelector";
-import GridLegend from "../components/gridLegend";
+import FormattedRangeInputForm from "../components/formattedRangeInputForm";
 import Login from "../components/login";
 import UnauthenticatedWarningMessage from "../components/unauthenticatedWarningMessage";
 import * as handActions from "../actions/handActions";
@@ -13,6 +13,7 @@ import * as sliderActions from "../actions/sliderActions";
 import Auth from "../services/authService";
 import CardGrid from "../components/playMode/handGrid";
 import "../App.css";
+import GridLegend from "../components/gridLegend";
 
 const auth = new Auth();
 
@@ -26,6 +27,16 @@ class App extends Component {
         this.props.positionActions.positionSelectedForEdit(positionCompositeKey);
         this.props.handActions.getHandRange(positionCompositeKey);
     };
+
+    submitRangeInputForm = (event, formValues) => {
+        event.preventDefault();
+        this.props.handActions.updateFormattedHandRange(
+            {
+                positionKey: this.props.selectedPositionKey,
+                raisingRange: formValues.raisingRange,
+                flattingRange: formValues.flattingRange,
+            })
+    }
 
     render() {
         return (
@@ -46,12 +57,8 @@ class App extends Component {
 
                     </div>
                 </div>
-                <div className="row">
-                <div className="col-md-4"></div>
-                <div className="col-md-1" style={{backgroundColor: "#cc33ff"}}>Raise</div>
-                <div className="col-md-1" style={{backgroundColor: "#00cc00"}}>Call</div>
-                <div className="col-md-1" style={{backgroundColor: "#ffff66"}}>Fold</div>
-                </div>
+                <GridLegend></GridLegend>
+                <FormattedRangeInputForm onSubmit={this.submitRangeInputForm}></FormattedRangeInputForm>
             </div>
         );
     }

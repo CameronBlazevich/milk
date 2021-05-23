@@ -37,6 +37,26 @@ class HandRangeApi {
 
     return fetch(request).then((response) => response.json());
   }
+
+  static updateFormattedHandRange(positionKey, raisingRange, flattingRange, authBearer) {
+    const request = new Request(apiBaseUrl + "formattedRange/", {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: authBearer,
+      },
+      method: "POST",
+      body: JSON.stringify({
+        positionKey,
+        Ranges: [
+          {ActionType: "Raise", FormattedHandRange: raisingRange},
+          {ActionType: "Call", FormattedHandRange: flattingRange}
+        ],
+      }),
+    });
+
+    return fetch(request).then((response) => response.json());
+  }
 }
 
 export default HandRangeApi;

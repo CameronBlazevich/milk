@@ -234,3 +234,7 @@ div.playing-card {
   height: 100%;
   width: 100%;
 }
+
+.formatted-range-input-form {
+  margin: 15px;
+}

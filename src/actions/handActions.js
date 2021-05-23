@@ -79,6 +79,32 @@ export function updateHandRange({ positionKey, hands }) {
   };
 }
 
+export function updateFormattedHandRange({ positionKey, raisingRange, flattingRange }) {
+  const auth = new Auth();
+  const authBearer = getAuthToken(auth);
+  if (auth.isAuthenticated()) {
+    handRangeApi = authenticatedHandRangeApi;
+  } else {
+    handRangeApi = unauthenticatedHandRangeApi;
+  }
+  return function (dispatch) {
+    dispatch(isLoading(ActionTypes.IS_UPDATING_HAND_RANGES, true));
+    return handRangeApi
+        .updateFormattedHandRange(positionKey, raisingRange, flattingRange, authBearer)
+        .then((handRange) => {
+          dispatch({
+            type: ActionTypes.SAVE_HAND_RANGE_UPDATE_SUCCESS,
+            handRange,
+          });
+          dispatch(isLoading(ActionTypes.IS_UPDATING_HAND_RANGES, false));
+          dispatch(createNotification(handRangeUpdateSuccessNotification));
+        })
+        .catch((error) => {
+          throw error;
+        });
+  };
+}
+
 export function loadHandRanges() {
   const auth = new Auth();
   const authBearer = getAuthToken(auth);
