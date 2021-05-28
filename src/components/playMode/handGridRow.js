@@ -12,6 +12,7 @@ function HandGridRow(props) {
       columnCard={card}
       rowCard={props.rowCard}
       selectedHands={props.selectedHands}
+      highlighted={props.highlighted}
     />
   ));
   return <div className="row">{row}</div>;

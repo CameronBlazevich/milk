@@ -11,6 +11,7 @@ function CardGrid(props) {
           row={index}
           rowCard={card}
           selectedHands={props.selectedHands}
+          highlighted={props.quizzedHand}
         />
       ))}
     </div>

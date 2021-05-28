@@ -35,7 +35,7 @@ class PositionSelector extends Component {
       });
 
       return (
-        <Menu.ItemGroup title={scenario.displayName} key={`${scenario.id}`}>
+        <Menu.ItemGroup title={scenario.name} key={`${scenario.id}`}>
           {situationSubMenus}
         </Menu.ItemGroup>
       );
@@ -91,7 +91,7 @@ class PositionSelector extends Component {
 
     return (
       <div>
-        <div>Scenario: {scenario.displayName}</div>
+        <div>Scenario: {scenario.name}</div>
         <div>Situation: {situation.displayName}</div>
         <div>Position: {position.key}</div>
       </div>

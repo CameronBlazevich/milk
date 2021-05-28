@@ -25,6 +25,10 @@ function Hand(props) {
     handText = `${props.columnCard + props.rowCard}o`;
   }
 
+  let className = "hand ";
+  if (props.highlighted && props.highlighted === handText) {
+    className = `${className} highlighted-hand`
+  }
   const frequencies = getHandBackground(props.selectedHands, handText);
   const raiseFreq = frequencies.raiseFreq;
   const callFreq = frequencies.callFreq;
@@ -32,7 +36,7 @@ function Hand(props) {
 
   const linearGrad = `linear-gradient(to right, #cc33ff ${raiseFreq}%, #00cc00 ${raiseFreq}% ${foldFreq}%, #ffff66 ${raiseFreq + foldFreq}%)`
   return (
-    <div id={handText} className={"hand"} style={{background: linearGrad }}>
+    <div id={handText} className={className} style={{background: linearGrad }}>
       <strong>{handText}</strong>
     </div>
   );

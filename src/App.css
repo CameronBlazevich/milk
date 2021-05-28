@@ -238,3 +238,8 @@ div.playing-card {
 .formatted-range-input-form {
   margin: 15px;
 }
+
+.highlighted-hand {
+  outline: black solid thick;
+  /* zoom: 150%;*/
+}
