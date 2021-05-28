@@ -1,5 +1,6 @@
 import React from "react";
 import { Col, Row } from "reactstrap";
+import backgroundImage from "../../images/PokerTable_v3.png";
 import PokerSeat from "./pokerSeat";
 import SeatContainer from "./seatContainer";
 
@@ -23,9 +24,13 @@ function PokerTable(props) {
   const openerSeat = !openerPosition ? null : seatingChart[openerPosition];
   const smallBlindSeat = seatingChart ? seatingChart["SB"] : null;
   const bigBlindSeat = seatingChart ? seatingChart["BB"] : null;
+  const utgSeat = seatingChart ? seatingChart["UTG"] : null;
+  const hjSeat = seatingChart ? seatingChart["HJ"] : null;
+  const coSeat = seatingChart ? seatingChart["CO"] : null;
+  const seats = {btnSeat, smallBlindSeat, bigBlindSeat, utgSeat, hjSeat, coSeat};
 
   return (
-    <div className="poker-table">
+      <div className="poker-table" style={{backgroundImage: `url(${backgroundImage})`, backgroundRepeat: "no-repeat", backgroundSize: "contain", backgroundPosition: "center"}}>
       <Row className="poker-table-row poker-table-row-end">
         <SeatContainer
           openerSeat={openerSeat}
@@ -35,6 +40,7 @@ function PokerTable(props) {
           classes={"seat-container"}
           childClasses={[""]}
           seatNumber={3}
+          displayName={getKeyByValue(seatingChart, 3)}
         ></SeatContainer>
       </Row>
       <Row className="poker-table-row poker-table-row-middle">
@@ -46,6 +52,7 @@ function PokerTable(props) {
             bigBlind={bigBlindSeat}
             childClasses={["pull-right"]}
             seatNumber={4}
+            displayName={getKeyByValue(seatingChart, 4)}
           ></SeatContainer>
           <Col sm="4"></Col>
           <SeatContainer
@@ -55,6 +62,7 @@ function PokerTable(props) {
             bigBlind={bigBlindSeat}
             childClasses={["pull-left"]}
             seatNumber={2}
+            displayName={getKeyByValue(seatingChart, 2)}
           ></SeatContainer>
         </Col>
       </Row>
@@ -68,6 +76,7 @@ function PokerTable(props) {
             bigBlind={bigBlindSeat}
             childClasses={["pull-right"]}
             seatNumber={5}
+            displayName={getKeyByValue(seatingChart, 5)}
           ></SeatContainer>
           <Col sm="4"></Col>
           <SeatContainer
@@ -78,6 +87,7 @@ function PokerTable(props) {
             bigBlind={bigBlindSeat}
             childClasses={["pull-left"]}
             seatNumber={1}
+            displayName={getKeyByValue(seatingChart, 1)}
           ></SeatContainer>
         </Col>
       </Row>
@@ -91,10 +101,20 @@ function PokerTable(props) {
           classes={"seat-container"}
           childClasses={[""]}
           seatNumber={0}
+          displayName={getKeyByValue(seatingChart, 0)}
         ></SeatContainer>
       </Row>
     </div>
   );
 }
+
+function getKeyByValue(object, value) {
+  if (!object) {
+    return "None";
+  }
+  const displayName =  Object.keys(object).find(key => object[key] === value) || "BTN";
+  return displayName;
+}
+
 
 export default PokerTable;

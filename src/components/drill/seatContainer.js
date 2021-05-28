@@ -13,6 +13,7 @@ function SeatContainer(props) {
     childClasses,
     isBottomRow,
     openAmount,
+      displayName,
   } = props;
 
   const isBtn = btnSeat == seatNumber;
@@ -44,11 +45,11 @@ function SeatContainer(props) {
       >
         <strong>{display}</strong>
       </div>
-      <PokerSeat openerSeat={openerSeat} seatNumber={seatNumber}></PokerSeat>
+      <PokerSeat openerSeat={openerSeat} seatNumber={seatNumber} displayName={displayName}></PokerSeat>
     </Col>
   ) : (
     <Col className={classes} sm="4">
-      <PokerSeat openerSeat={openerSeat} seatNumber={seatNumber}></PokerSeat>
+      <PokerSeat openerSeat={openerSeat} seatNumber={seatNumber} displayName={displayName}></PokerSeat>
       <div
         className={
           [...childClasses] +

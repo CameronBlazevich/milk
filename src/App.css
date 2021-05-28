@@ -121,13 +121,13 @@
 
 .poker-table {
   display: inline-block;
+  position: relative;
   margin: 20px;
   padding: 15px;
   height: 400px;
   width: 775px;
-  background-color: darkcyan;
-  /* border: 1px solid black; */
-  border-radius: 150px;
+  border: 1px solid black;
+  /*border-radius: 150px;*/
 }
 
 .poker-table-row {
