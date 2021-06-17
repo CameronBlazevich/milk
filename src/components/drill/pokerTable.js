@@ -24,14 +24,26 @@ function PokerTable(props) {
   const openerSeat = !openerPosition ? null : seatingChart[openerPosition];
   const smallBlindSeat = seatingChart ? seatingChart["SB"] : null;
   const bigBlindSeat = seatingChart ? seatingChart["BB"] : null;
-  const utgSeat = seatingChart ? seatingChart["UTG"] : null;
-  const hjSeat = seatingChart ? seatingChart["HJ"] : null;
-  const coSeat = seatingChart ? seatingChart["CO"] : null;
-  const seats = {btnSeat, smallBlindSeat, bigBlindSeat, utgSeat, hjSeat, coSeat};
+
+  const leftAlignedSeats = "1%";
+  const rightAlignedSeats = "75%";
+  const centerAlignedSeats = "38%";
+  const midTopAlignedSeats = "20%";
+  const lowTopAlignedSeats = "65%";
+
+
+  const seatPositions = {
+    // seatNumber: {top: x, left: y}
+    0: {top: "75%", left: centerAlignedSeats},
+    1: {top: lowTopAlignedSeats, left: rightAlignedSeats},
+    2: {top: midTopAlignedSeats, left: rightAlignedSeats},
+    3: {top: "1%", left: centerAlignedSeats},
+    4: {top: midTopAlignedSeats, left: leftAlignedSeats},
+    5: {top: lowTopAlignedSeats, left: leftAlignedSeats},
+  };
 
   return (
       <div className="poker-table" style={{backgroundImage: `url(${backgroundImage})`, backgroundRepeat: "no-repeat", backgroundSize: "contain", backgroundPosition: "center"}}>
-      <Row className="poker-table-row poker-table-row-end">
         <SeatContainer
           openerSeat={openerSeat}
           btnSeat={btnSeat}
@@ -41,57 +53,63 @@ function PokerTable(props) {
           childClasses={[""]}
           seatNumber={3}
           displayName={getKeyByValue(seatingChart, 3)}
+          top={seatPositions["3"].top}
+          left={seatPositions["3"].left}
         ></SeatContainer>
-      </Row>
-      <Row className="poker-table-row poker-table-row-middle">
-        <Col sm="12" className="seat-container">
           <SeatContainer
             openerSeat={openerSeat}
             btnSeat={btnSeat}
             smallBlind={smallBlindSeat}
             bigBlind={bigBlindSeat}
+            classes={"seat-container"}
             childClasses={["pull-right"]}
             seatNumber={4}
             displayName={getKeyByValue(seatingChart, 4)}
+            top={seatPositions["4"].top}
+            left={seatPositions["4"].left}
           ></SeatContainer>
-          <Col sm="4"></Col>
+
           <SeatContainer
             openerSeat={openerSeat}
             btnSeat={btnSeat}
             smallBlind={smallBlindSeat}
             bigBlind={bigBlindSeat}
+            classes={"seat-container"}
             childClasses={["pull-left"]}
             seatNumber={2}
             displayName={getKeyByValue(seatingChart, 2)}
+            top={seatPositions["2"].top}
+            left={seatPositions["2"].left}
           ></SeatContainer>
-        </Col>
-      </Row>
-      <Row className="poker-table-row poker-table-row-middle">
-        <Col sm="12" className="seat-container">
+
           <SeatContainer
             isBottomRow={true}
             openerSeat={openerSeat}
             btnSeat={btnSeat}
             smallBlind={smallBlindSeat}
             bigBlind={bigBlindSeat}
+            classes={"seat-container"}
             childClasses={["pull-right"]}
             seatNumber={5}
             displayName={getKeyByValue(seatingChart, 5)}
+            top={seatPositions["5"].top}
+            left={seatPositions["5"].left}
           ></SeatContainer>
-          <Col sm="4"></Col>
+
           <SeatContainer
             isBottomRow={true}
             openerSeat={openerSeat}
             btnSeat={btnSeat}
             smallBlind={smallBlindSeat}
             bigBlind={bigBlindSeat}
+            classes={"seat-container"}
             childClasses={["pull-left"]}
             seatNumber={1}
             displayName={getKeyByValue(seatingChart, 1)}
+            top={seatPositions["1"].top}
+            left={seatPositions["1"].left}
           ></SeatContainer>
-        </Col>
-      </Row>
-      <Row className="poker-table-row poker-table-row-end">
+
         <SeatContainer
           isBottomRow={true}
           openerSeat={openerSeat}
@@ -99,11 +117,12 @@ function PokerTable(props) {
           smallBlind={smallBlindSeat}
           bigBlind={bigBlindSeat}
           classes={"seat-container"}
-          childClasses={[""]}
+          childClasses={["pull-bottom"]}
           seatNumber={0}
           displayName={getKeyByValue(seatingChart, 0)}
+          top={seatPositions["0"].top}
+          left={seatPositions["0"].left}
         ></SeatContainer>
-      </Row>
     </div>
   );
 }

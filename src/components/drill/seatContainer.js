@@ -11,6 +11,7 @@ function SeatContainer(props) {
     bigBlind,
     classes,
     childClasses,
+      top, left,
     isBottomRow,
     openAmount,
       displayName,
@@ -32,7 +33,7 @@ function SeatContainer(props) {
     : "";
 
   return isBottomRow ? (
-    <Col className={classes} sm="4">
+    <div className={classes} style={{top: top, left: left}}>
       <div
         className={
           [...childClasses] +
@@ -46,9 +47,9 @@ function SeatContainer(props) {
         <strong>{display}</strong>
       </div>
       <PokerSeat openerSeat={openerSeat} seatNumber={seatNumber} displayName={displayName}></PokerSeat>
-    </Col>
+    </div>
   ) : (
-    <Col className={classes} sm="4">
+    <div className={classes} style={{top: top, left: left}}>
       <PokerSeat openerSeat={openerSeat} seatNumber={seatNumber} displayName={displayName}></PokerSeat>
       <div
         className={
@@ -62,7 +63,7 @@ function SeatContainer(props) {
       >
         <strong>{display}</strong>
       </div>
-    </Col>
+    </div>
   );
 }
 

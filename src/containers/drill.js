@@ -82,7 +82,6 @@ class Drill extends Component {
         }
 
         const randomHand = hands[Math.floor(Math.random() * hands.length)];
-        console.log(randomHand);
 
         this.props.quizActions.quizGenerated(
             {
@@ -92,8 +91,14 @@ class Drill extends Component {
             },
             {situation: randomSituation, position: randomPosition, hand: randomHand}
         );
-        console.log(randomSituation, randomPosition);
     };
+
+    getOpenerPosition = (quizPosition) => {
+        console.log(quizPosition)
+        const openerPosition =  quizPosition?.preflopActions?.find(x => x.actionType === "Open")?.actorsPosition || "";
+        return openerPosition;
+    }
+
 
     renderActionButtons = () => {
         return (
@@ -192,7 +197,7 @@ class Drill extends Component {
                         <Row>
                             <PokerTable
                                 heroPosition={this.props.quizPosition.key}
-                                openerPosition={this.props.quizSituation.openerPosition}
+                                openerPosition={this.getOpenerPosition(this.props.quizPosition)}
                             ></PokerTable>
                         </Row>
                         <Row>{playingCards}</Row>

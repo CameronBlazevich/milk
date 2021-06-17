@@ -8,7 +8,7 @@ function PokerSeat(props) {
       <div
         className={"poker-seat " + (openerSeat === seatNumber ? "opener" : "")}
       >
-        <div>{`${displayName}`}</div>
+        <div><strong>{`${displayName}`}</strong></div>
         <div>$100</div>
       </div>
     </div>
