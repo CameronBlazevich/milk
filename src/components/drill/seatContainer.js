@@ -1,6 +1,6 @@
 import React from "react";
-import { Col } from "reactstrap";
 import PokerSeat from "./pokerSeat";
+import ChipsInPot from "./chipsInPot"
 
 function SeatContainer(props) {
   const {
@@ -11,10 +11,10 @@ function SeatContainer(props) {
     bigBlind,
     classes,
     childClasses,
-      top, left,
+    top, left,
     isBottomRow,
-    openAmount,
-      displayName,
+    displayName,
+    preflopActions,
   } = props;
 
   const isBtn = btnSeat == seatNumber;
@@ -22,46 +22,69 @@ function SeatContainer(props) {
   const isSmallBlind = smallBlind === seatNumber;
   const isOpener = openerSeat === seatNumber;
 
-  const display = isBtn
-    ? "D"
-    : isBigBlind
+    const calculateThreeBetAmount = (preflopActionForSeat, allPreflopActions) => {
+        // ToDo: This only works for subset of usecases up to and included defending 3bets
+        const opener = allPreflopActions.find(pfa => pfa.actionType === "Open");
+        if (opener && opener.actorsPosition === "SB") {
+            return "7.5";
+        }
+
+        if (preflopActionForSeat.actorsPosition === "BB") {
+            return "12";
+        }
+
+        if (preflopActionForSeat.actorsPosition === "SB") {
+            return "11";
+        }
+
+        return "7.5";
+    }
+
+  let chipAmount = isBigBlind
     ? "1"
     : isSmallBlind
     ? ".5"
-    : isOpener
-    ? "3"
     : "";
+
+  const actionForThisSeat = preflopActions?.find(pfa => pfa.actorsPosition === displayName);
+
+  if (actionForThisSeat) {
+      if (actionForThisSeat.actionType === "Open") {
+          chipAmount = "2.5";
+      } else if (actionForThisSeat.actionType === "ThreeBet") {
+          chipAmount = calculateThreeBetAmount(actionForThisSeat, preflopActions);
+      }
+  }
+
+  const isSmallBlindAndFolded = isSmallBlind && chipAmount === ".5";
+  const isBigBlindAndFolded = isBigBlind && chipAmount === "1";
+  const isBlindAndFolded = isSmallBlindAndFolded || isBigBlindAndFolded;
+
 
   return isBottomRow ? (
     <div className={classes} style={{top: top, left: left}}>
       <div
         className={
           [...childClasses] +
-          " chip-area " +
-          (isBtn ? "dealer-button show-button" : "") +
-          (isSmallBlind ? "blinds small-blind" : "") +
-          (isBigBlind ? "blinds big-blind" : "") +
-          (isOpener ? "open" : "")
+          " chip-area "
         }
       >
-        <strong>{display}</strong>
+          <ChipsInPot chipAmount={chipAmount} isBlindAndFolded={isBlindAndFolded}></ChipsInPot>
+          <div className={"dealer-button" + (isBtn ? " show-button " : " ")}><strong>D</strong></div>
       </div>
-      <PokerSeat openerSeat={openerSeat} seatNumber={seatNumber} displayName={displayName}></PokerSeat>
+      <PokerSeat preflopActions={preflopActions} displayName={displayName}></PokerSeat>
     </div>
   ) : (
     <div className={classes} style={{top: top, left: left}}>
-      <PokerSeat openerSeat={openerSeat} seatNumber={seatNumber} displayName={displayName}></PokerSeat>
+      <PokerSeat preflopActions={preflopActions} displayName={displayName}></PokerSeat>
       <div
         className={
           [...childClasses] +
-          " chip-area " +
-          (isBtn ? "dealer-button show-button" : "") +
-          (isSmallBlind ? "blinds small-blind" : "") +
-          (isBigBlind ? "blinds big-blind" : "") +
-          (isOpener ? "open" : "")
+          " chip-area "
         }
       >
-        <strong>{display}</strong>
+          <div className={"dealer-button" + (isBtn ? " show-button " : " ")}><strong>D</strong></div>
+          <ChipsInPot chipAmount={chipAmount} isBlindAndFolded={isBlindAndFolded}></ChipsInPot>
       </div>
     </div>
   );

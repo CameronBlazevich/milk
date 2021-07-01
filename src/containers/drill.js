@@ -228,6 +228,7 @@ class Drill extends Component {
                             <PokerTable
                                 heroPosition={this.props.quizPosition.key}
                                 openerPosition={this.getOpenerPosition(this.props.quizPosition)}
+                                preflopActions={this.props.quizPosition.preflopActions}
                             ></PokerTable>
                         </Row>
                         <Row>{playingCards}</Row>

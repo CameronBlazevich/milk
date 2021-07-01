@@ -152,39 +152,67 @@
   display: inline-block;
 }
 
-.poker-seat.opener {
-  background-color: yellow;
-}
 
 .seat-container {
   position: absolute;
   text-align: center;
   width:200px;
- /* border: 1px solid black;*/
+  /*border: 1px solid cyan;*/
 }
 
 .chip-area {
-  height: 25px;
-  width: 25px;
-  border-radius: 50%;
+  height: 50px;
+  width: 50px;
   text-align: center;
   vertical-align: middle;
-  margin: 5px;
-
-  /* temp */
+  margin: 0px;
   display: inline-block;
-  /* background-color: whitesmoke; */
+  /*border: 1px solid cyan;*/
 }
 
 .dealer-button {
-  /* temp */
-  /* display: inline-block;
-  background-color: whitesmoke; */
+  border-radius: 25px;
+  height: 25px;
+  width: 25px;
+  display: none;
 }
 
 .dealer-button.show-button {
-  display: inline-block;
+  display: block;
   background-color: whitesmoke;
+  border: 1px solid black;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.chips-in-pot-container {
+  display: inline-flex;
+  /*border: 1px solid cyan;*/
+}
+
+.chips-in-pot-container.folded {
+  opacity: 25%;
+}
+
+.chips {
+  border: 2px solid black;
+  border-radius: 20px;
+  background-color: lightcoral;
+  width:25px;
+  height: 25px;
+  z-index: 10;
+}
+
+.chip-amount {
+  border: 1px solid black;
+  border-radius: 0px 15px 15px 5px;
+  background-color: lightgrey;
+  width: fit-content;
+  height: fit-content;
+  padding-left: 6px;
+  padding-right:2px;
+  margin-left:-6px;
+  align-self: flex-end;
 }
 
 .blinds {
@@ -242,3 +270,8 @@ div.playing-card {
   outline: black solid thick;
   /* zoom: 150%;*/
 }
+
+
+
+
+/**{border: 1px solid cyan}*/

@@ -3,7 +3,7 @@ import backgroundImage from "../../images/PokerTable_v3.png";
 import SeatContainer from "./seatContainer";
 
 function PokerTable(props) {
-  const { heroPosition, openerPosition } = props;
+  const { heroPosition, openerPosition, preflopActions } = props;
 
   const btnPlacement = { BTN: 0, CO: 5, HJ: 4, UTG: 3, BB: 2, SB: 1 };
 
@@ -24,20 +24,20 @@ function PokerTable(props) {
   const bigBlindSeat = seatingChart ? seatingChart["BB"] : null;
 
   const leftAlignedSeats = "1%";
-  const rightAlignedSeats = "75%";
+  const rightAlignedSeats = "72%";
   const centerAlignedSeats = "38%";
   const midTopAlignedSeats = "20%";
-  const lowTopAlignedSeats = "65%";
+  const lowTopAlignedSeats = "60%";
 
 
   const seatPositions = {
     // seatNumber: {top: x, left: y}
-    0: {top: "75%", left: centerAlignedSeats},
+    0: {top: "72%", left: centerAlignedSeats},
     1: {top: lowTopAlignedSeats, left: rightAlignedSeats},
-    2: {top: midTopAlignedSeats, left: rightAlignedSeats},
+    2: {top: midTopAlignedSeats, left: "71%"},
     3: {top: "1%", left: centerAlignedSeats},
     4: {top: midTopAlignedSeats, left: leftAlignedSeats},
-    5: {top: lowTopAlignedSeats, left: leftAlignedSeats},
+    5: {top: lowTopAlignedSeats, left: "4%"},
   };
 
   return (
@@ -53,6 +53,7 @@ function PokerTable(props) {
           displayName={getKeyByValue(seatingChart, 3)}
           top={seatPositions["3"].top}
           left={seatPositions["3"].left}
+          preflopActions={preflopActions}
         ></SeatContainer>
           <SeatContainer
             openerSeat={openerSeat}
@@ -65,6 +66,7 @@ function PokerTable(props) {
             displayName={getKeyByValue(seatingChart, 4)}
             top={seatPositions["4"].top}
             left={seatPositions["4"].left}
+            preflopActions={preflopActions}
           ></SeatContainer>
 
           <SeatContainer
@@ -78,6 +80,7 @@ function PokerTable(props) {
             displayName={getKeyByValue(seatingChart, 2)}
             top={seatPositions["2"].top}
             left={seatPositions["2"].left}
+            preflopActions={preflopActions}
           ></SeatContainer>
 
           <SeatContainer
@@ -92,6 +95,7 @@ function PokerTable(props) {
             displayName={getKeyByValue(seatingChart, 5)}
             top={seatPositions["5"].top}
             left={seatPositions["5"].left}
+            preflopActions={preflopActions}
           ></SeatContainer>
 
           <SeatContainer
@@ -106,6 +110,7 @@ function PokerTable(props) {
             displayName={getKeyByValue(seatingChart, 1)}
             top={seatPositions["1"].top}
             left={seatPositions["1"].left}
+            preflopActions={preflopActions}
           ></SeatContainer>
 
         <SeatContainer
@@ -120,6 +125,7 @@ function PokerTable(props) {
           displayName={getKeyByValue(seatingChart, 0)}
           top={seatPositions["0"].top}
           left={seatPositions["0"].left}
+          preflopActions={preflopActions}
         ></SeatContainer>
     </div>
   );
