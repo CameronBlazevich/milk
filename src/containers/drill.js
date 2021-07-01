@@ -9,6 +9,7 @@ import {hands} from "../services/handRankService";
 import {PlayingCard} from "../components/cards/playingCard";
 import CardGrid from "../components/playMode/handGrid";
 import GridLegend from "../components/gridLegend";
+import PreflopActionDescription from "../components/drill/preflopActionDescription"
 
 class Drill extends Component {
     handleScenarioSelectorChange = (selectedValues) => {
@@ -65,6 +66,11 @@ class Drill extends Component {
             (x) => x.positions.length > 0
         );
 
+        if (!availableSituationsWithPositionsThatHaveData?.length > 0) {
+            alert('No data for this quiz')
+            return;
+        }
+
         const randomSituation =
             availableSituationsWithPositionsThatHaveData[
                 Math.floor(
@@ -81,7 +87,10 @@ class Drill extends Component {
             return;
         }
 
-        const randomHand = hands[Math.floor(Math.random() * hands.length)];
+        // if the position selected has an "open" action use the hand range to pick the random hand
+        const randomHand = this.generateRandomHand(randomPosition);
+
+        // const randomHand = hands[Math.floor(Math.random() * hands.length)];
 
         this.props.quizActions.quizGenerated(
             {
@@ -93,8 +102,21 @@ class Drill extends Component {
         );
     };
 
+    generateRandomHand = (position) => {
+        // if previous actions have handRanges, use those to generate the quiz hand otherwise just choose randomly from the deck
+        const previousActionForThisPosition = position.preflopActions.find(pf => pf.actorsPosition === position.key);
+        if (previousActionForThisPosition && previousActionForThisPosition.handRange) {
+            const handsThatTookAction = previousActionForThisPosition.handRange.handsArray;
+            if (handsThatTookAction?.length > 0) {
+                const handToQuizAbout =  handsThatTookAction[Math.floor(Math.random() * handsThatTookAction.length)].hand;
+                return handToQuizAbout;
+            }
+        }
+
+        return hands[Math.floor(Math.random() * hands.length)];
+    }
+
     getOpenerPosition = (quizPosition) => {
-        console.log(quizPosition)
         const openerPosition =  quizPosition?.preflopActions?.find(x => x.actionType === "Open")?.actorsPosition || "";
         return openerPosition;
     }
@@ -158,6 +180,14 @@ class Drill extends Component {
         );
     };
 
+    renderPreflopActionDescription = () => {
+        return (
+            <PreflopActionDescription
+                preflopActions={this.props.quizPosition.preflopActions}
+            />
+        )
+    }
+
     render() {
         const playingCards = !this.props.quizHand
             ? null
@@ -204,6 +234,7 @@ class Drill extends Component {
                         {this.props.quizHand && this.renderActionButtons()}
                     </Col>
                     <Col sm="6">{this.props.hasAnswered && this.renderRangeGrid()}</Col>
+                    <Col sm="6">{!this.props.hasAnswered && this.renderPreflopActionDescription()}</Col>
                 </Row>
             </div>
         );

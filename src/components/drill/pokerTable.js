@@ -1,7 +1,5 @@
 import React from "react";
-import { Col, Row } from "reactstrap";
 import backgroundImage from "../../images/PokerTable_v3.png";
-import PokerSeat from "./pokerSeat";
 import SeatContainer from "./seatContainer";
 
 function PokerTable(props) {
