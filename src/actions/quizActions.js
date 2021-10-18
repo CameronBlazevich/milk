@@ -17,3 +17,7 @@ export function quizGenerated(quizKey, { situation, position, hand }) {
 export function quizAnswered(actionChosen) {
   return { type: ActionTypes.QUIZ_ANSWERED, actionChosen };
 }
+
+export function lockHerosPositionForQuiz(position) {
+  return { type: ActionTypes.QUIZ_HEROS_POSITION_UPDATED, position }
+}

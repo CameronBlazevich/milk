@@ -11,13 +11,19 @@ function PokerSeat(props) {
           actionDisplay = actionForSeat.actionType;
       }
   }
+
+  const classes = ["poker-seat "];
+  // if (actionDisplay === "Fold") {
+  //     classes.push(" folded ");
+  // }
   return (
     <div>
+        {/*{ actionDisplay === "3 Bet" && <div className={"bet-bubble"}><p className="bet-bubble">{actionDisplay}</p></div> }*/}
       <div
-        className={"poker-seat "}
+        className={[...classes]}
       >
         <div><strong>{`${displayName}`}</strong></div>
-        <div>$100</div>
+        <div>100B</div>
       </div>
     </div>
   );

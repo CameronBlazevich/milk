@@ -4,7 +4,6 @@ import ChipsInPot from "./chipsInPot"
 
 function SeatContainer(props) {
   const {
-    openerSeat,
     seatNumber,
     btnSeat,
     smallBlind,
@@ -15,12 +14,12 @@ function SeatContainer(props) {
     isBottomRow,
     displayName,
     preflopActions,
+      heroPosition
   } = props;
 
   const isBtn = btnSeat == seatNumber;
   const isBigBlind = bigBlind === seatNumber;
   const isSmallBlind = smallBlind === seatNumber;
-  const isOpener = openerSeat === seatNumber;
 
     const calculateThreeBetAmount = (preflopActionForSeat, allPreflopActions) => {
         // ToDo: This only works for subset of usecases up to and included defending 3bets
@@ -56,9 +55,18 @@ function SeatContainer(props) {
       }
   }
 
-  const isSmallBlindAndFolded = isSmallBlind && chipAmount === ".5";
-  const isBigBlindAndFolded = isBigBlind && chipAmount === "1";
-  const isBlindAndFolded = isSmallBlindAndFolded || isBigBlindAndFolded;
+  // in SRP's blinds will be .5 & 1 when hero is in blind and has yet to act
+  let isBlindAndFolded = false;
+   if (preflopActions?.find(pfa => pfa.actionType === "ThreeBet")) {
+      const isSmallBlindAndFolded = isSmallBlind && chipAmount === ".5" && heroPosition !== "SB";
+      const isBigBlindAndFolded = isBigBlind && chipAmount === "1" && heroPosition !== "BB";
+      isBlindAndFolded = isSmallBlindAndFolded || isBigBlindAndFolded;
+   } else if (preflopActions?.find(pfa => pfa.actionType === "Open")) {
+      // BB Defense might fall into here?
+      isBlindAndFolded = isSmallBlind && chipAmount === ".5";
+  }
+
+
 
 
   return isBottomRow ? (

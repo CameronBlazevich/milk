@@ -10,6 +10,7 @@ import {PlayingCard} from "../components/cards/playingCard";
 import CardGrid from "../components/playMode/handGrid";
 import GridLegend from "../components/gridLegend";
 import PreflopActionDescription from "../components/drill/preflopActionDescription"
+import HerosPositionSelector from "../components/drill/herosPositionSelector"
 
 class Drill extends Component {
     handleScenarioSelectorChange = (selectedValues) => {
@@ -71,14 +72,40 @@ class Drill extends Component {
             return;
         }
 
-        const randomSituation =
-            availableSituationsWithPositionsThatHaveData[
-                Math.floor(
-                    Math.random() * availableSituationsWithPositionsThatHaveData.length
-                )
-                ];
+        // only quiz on positions selected if there are some selected
+        let situationsThatMeetHerosPositionsToQuiz = [];
+        const herosPositionsToQuiz = this.props.herosPositionsToQuiz;
+        if (herosPositionsToQuiz?.length > 0) {
+            situationsThatMeetHerosPositionsToQuiz = availableSituationsWithPositionsThatHaveData.filter(
+                situation => situation.positions.some(pos => herosPositionsToQuiz.includes(pos.key))
+            );
+        }
 
-        const availablePositions = randomSituation.positions;
+        // if heros positions to quiz are selected, we need a situation that includes those positions
+        let randomSituation = {};
+        if (situationsThatMeetHerosPositionsToQuiz.length > 0) {
+            randomSituation =
+                situationsThatMeetHerosPositionsToQuiz[
+                    Math.floor(
+                        Math.random() * situationsThatMeetHerosPositionsToQuiz.length
+                    )
+                    ];
+        } else {
+            randomSituation =
+                availableSituationsWithPositionsThatHaveData[
+                    Math.floor(
+                        Math.random() * availableSituationsWithPositionsThatHaveData.length
+                    )
+                    ];
+        }
+
+
+
+        let availablePositions = randomSituation.positions;
+        if (herosPositionsToQuiz?.length > 0) {
+            availablePositions = availablePositions.filter(pos => herosPositionsToQuiz.includes(pos.key));
+        }
+
         const randomPosition =
             availablePositions[Math.floor(Math.random() * availablePositions.length)];
 
@@ -108,7 +135,7 @@ class Drill extends Component {
         if (previousActionForThisPosition && previousActionForThisPosition.handRange) {
             const handsThatTookAction = previousActionForThisPosition.handRange.handsArray;
             if (handsThatTookAction?.length > 0) {
-                const handToQuizAbout =  handsThatTookAction[Math.floor(Math.random() * handsThatTookAction.length)].hand;
+                const handToQuizAbout = handsThatTookAction[Math.floor(Math.random() * handsThatTookAction.length)].hand;
                 return handToQuizAbout;
             }
         }
@@ -117,16 +144,18 @@ class Drill extends Component {
     }
 
     getOpenerPosition = (quizPosition) => {
-        const openerPosition =  quizPosition?.preflopActions?.find(x => x.actionType === "Open")?.actorsPosition || "";
+        const openerPosition = quizPosition?.preflopActions?.find(x => x.actionType === "Open")?.actorsPosition || "";
         return openerPosition;
+    }
+
+    updateHerosPositionToDrill = (foo) => {
+        this.props.quizActions.lockHerosPositionForQuiz(foo);
     }
 
 
     renderActionButtons = () => {
         return (
-            <Row className="text-align-right">
-                <Col sm="5"></Col>
-                <Col sm="5">
+            <Row className="">
                     {!this.props.hasAnswered && (
                         <Button
                             className="action-button"
@@ -163,26 +192,26 @@ class Drill extends Component {
                             Reset
                         </Button>
                     )}
-                </Col>
             </Row>
         );
     };
 
     renderRangeGrid = () => {
         return (
-            <div>
+            <Row className={"card-grid-container"}>
                 <CardGrid
                     selectedHands={this.props.quizPosition.handRange.hands}
                     quizzedHand={this.props.quizHand}
                 />
                 <GridLegend/>
-            </div>
+            </Row>
         );
     };
 
-    renderPreflopActionDescription = () => {
+    renderPreflopActionDescription = (i) => {
         return (
             <PreflopActionDescription
+                key={i}
                 preflopActions={this.props.quizPosition.preflopActions}
             />
         )
@@ -223,7 +252,15 @@ class Drill extends Component {
                     </Col>
                 </Row>
                 <Row>
-                    <Col sm="6" className="text-align-center">
+                    <Col sm={1}>
+                        <Row>
+                        <HerosPositionSelector onChange={this.updateHerosPositionToDrill}/>
+                        </Row>
+                        <Row>
+                            {this.renderPreflopActionDescription()}
+                        </Row>
+                    </Col>
+                    <Col sm="4" className="text-align-center fit-content">
                         <Row>
                             <PokerTable
                                 heroPosition={this.props.quizPosition.key}
@@ -231,11 +268,12 @@ class Drill extends Component {
                                 preflopActions={this.props.quizPosition.preflopActions}
                             ></PokerTable>
                         </Row>
-                        <Row>{playingCards}</Row>
+                        <Row><Col className={"playing-cards-container"}>{playingCards}</Col></Row>
+
                         {this.props.quizHand && this.renderActionButtons()}
                     </Col>
-                    <Col sm="6">{this.props.hasAnswered && this.renderRangeGrid()}</Col>
-                    <Col sm="6">{!this.props.hasAnswered && this.renderPreflopActionDescription()}</Col>
+                    <Col sm="4" className={"fit-content"}>{this.props.hasAnswered && this.renderRangeGrid()}</Col>
+                    <Col sm="4" className={"fit-content"}>{!this.props.hasAnswered && this.renderPreflopActionDescription()}</Col>
                 </Row>
             </div>
         );
@@ -254,6 +292,7 @@ function mapStateToProps(state, ownProps) {
         quizSituation: state.quiz.situation,
         quizHand: state.quiz.hand,
         hasAnswered: state.quiz.hasAnswered,
+        herosPositionsToQuiz: state.quiz.herosPositionsToQuiz,
     };
 }
 

@@ -43,6 +43,7 @@ function PokerTable(props) {
   return (
       <div className="poker-table" style={{backgroundImage: `url(${backgroundImage})`, backgroundRepeat: "no-repeat", backgroundSize: "contain", backgroundPosition: "center"}}>
         <SeatContainer
+            heroPosition={heroPosition}
           openerSeat={openerSeat}
           btnSeat={btnSeat}
           smallBlind={smallBlindSeat}
@@ -56,6 +57,7 @@ function PokerTable(props) {
           preflopActions={preflopActions}
         ></SeatContainer>
           <SeatContainer
+              heroPosition={heroPosition}
             openerSeat={openerSeat}
             btnSeat={btnSeat}
             smallBlind={smallBlindSeat}
@@ -70,6 +72,7 @@ function PokerTable(props) {
           ></SeatContainer>
 
           <SeatContainer
+              heroPosition={heroPosition}
             openerSeat={openerSeat}
             btnSeat={btnSeat}
             smallBlind={smallBlindSeat}
@@ -84,6 +87,7 @@ function PokerTable(props) {
           ></SeatContainer>
 
           <SeatContainer
+              heroPosition={heroPosition}
             isBottomRow={true}
             openerSeat={openerSeat}
             btnSeat={btnSeat}
@@ -99,6 +103,7 @@ function PokerTable(props) {
           ></SeatContainer>
 
           <SeatContainer
+              heroPosition={heroPosition}
             isBottomRow={true}
             openerSeat={openerSeat}
             btnSeat={btnSeat}
@@ -114,6 +119,7 @@ function PokerTable(props) {
           ></SeatContainer>
 
         <SeatContainer
+            heroPosition={heroPosition}
           isBottomRow={true}
           openerSeat={openerSeat}
           btnSeat={btnSeat}

@@ -1,13 +1,13 @@
 import React from "react";
+import {Row, Col} from 'reactstrap';
 
 function GridLegend(props) {
   return (
-      <div className="row">
-          <div className="col-md-4"></div>
-          <div className="col-md-1" style={{backgroundColor: "#cc33ff"}}>Raise</div>
-          <div className="col-md-1" style={{backgroundColor: "#00cc00"}}>Call</div>
-          <div className="col-md-1" style={{backgroundColor: "#ffff66"}}>Fold</div>
-      </div>
+      <Row className="row grid-legend">
+          <Col sm={{ size: 1}} className="grid-legend-entry" style={{backgroundColor: "#cc33ff"}}>Raise</Col>
+          <Col sm={{ size: 1}} className="grid-legend-entry" style={{backgroundColor: "#00cc00"}}>Call</Col>
+          <Col sm={{ size: 1}} className="grid-legend-entry" style={{backgroundColor: "#ffff66"}}>Fold</Col>
+      </Row>
   );
 }
 

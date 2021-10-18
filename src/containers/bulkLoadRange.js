@@ -30,6 +30,7 @@ class App extends Component {
 
     submitRangeInputForm = (event, formValues) => {
         event.preventDefault();
+        event.target.reset();
         this.props.handActions.updateFormattedHandRange(
             {
                 positionKey: this.props.selectedPositionKey,

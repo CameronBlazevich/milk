@@ -4,7 +4,7 @@ import { CardArray } from "../../common/cardArray";
 
 function CardGrid(props) {
   return (
-    <div>
+    <div className={"card-grid"}>
       {CardArray.map((card, index) => (
         <HandGridRow
           key={index}

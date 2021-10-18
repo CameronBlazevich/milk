@@ -8,7 +8,12 @@ function FormattedRangeInputForm(props) {
     const handleInputChange = e => {
         setEachEntry({ ...eachEntry, [e.target.name]: e.target.value });
     };
-    return <Form inline className="formatted-range-input-form"  onSubmit={e => props.onSubmit(e, eachEntry)}>
+
+    const handleSubmit = (e, eachEntry) => {
+        props.onSubmit(e, eachEntry);
+    }
+
+    return <Form inline className="formatted-range-input-form"  onSubmit={e => handleSubmit(e, eachEntry)}>
             <FormGroup>
                 <Label for="raisingRange" className="mb-2 mr-sm-2 mb-sm-0">Raising Range:</Label>
                 <Input type="text" name="raisingRange" id="raisingRange" className="mr-sm-2" onChange={handleInputChange}/>
