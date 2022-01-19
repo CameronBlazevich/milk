@@ -32,7 +32,7 @@ export default function quizReducer(state = initialState.quiz, action) {
     case ActionTypes.RESET:
       return initialState.quiz;
 
-    case ActionTypes.QUIZ_HEROS_POSITION_UPDATED:
+    case ActionTypes.QUIZ_HEROS_POSITION_UPDATED: {
       let currentlySelectedPositionsForHero = [...(state.herosPositionsToQuiz || [])];
       const isAlreadyInArray = currentlySelectedPositionsForHero.includes(action.position);
 
@@ -42,6 +42,19 @@ export default function quizReducer(state = initialState.quiz, action) {
         currentlySelectedPositionsForHero.push(action.position);
       }
       return Object.assign({}, state, {herosPositionsToQuiz: currentlySelectedPositionsForHero})
+    }
+
+    case ActionTypes.QUIZ_VILLAINS_POSITION_UPDATED: {
+      let currentlySelectedPositionsForVillain = [...(state.villainsPositionsToQuiz || [])];
+      const isAlreadyInArray = currentlySelectedPositionsForVillain.includes(action.position);
+
+      if (isAlreadyInArray) {
+        currentlySelectedPositionsForVillain = currentlySelectedPositionsForVillain.filter(x => x !== action.position);
+      } else {
+        currentlySelectedPositionsForVillain.push(action.position);
+      }
+      return Object.assign({}, state, {villainsPositionsToQuiz: currentlySelectedPositionsForVillain})
+    }
 
     default:
       return initialState.quiz;

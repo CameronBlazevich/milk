@@ -11,6 +11,8 @@ import CardGrid from "../components/playMode/handGrid";
 import GridLegend from "../components/gridLegend";
 import PreflopActionDescription from "../components/drill/preflopActionDescription"
 import HerosPositionSelector from "../components/drill/herosPositionSelector"
+import VillainsPositionSelector from "../components/drill/villainsPositionSelector";
+import {intersect} from "../utilities/arrayOperations";
 
 class Drill extends Component {
     handleScenarioSelectorChange = (selectedValues) => {
@@ -79,15 +81,48 @@ class Drill extends Component {
             situationsThatMeetHerosPositionsToQuiz = availableSituationsWithPositionsThatHaveData.filter(
                 situation => situation.positions.some(pos => herosPositionsToQuiz.includes(pos.key))
             );
+            if (situationsThatMeetHerosPositionsToQuiz.length === 0) {
+                alert("Hero's Position Filters doesn't work.");
+            }
         }
+
+        // villain's position
+        let situationsThatMeetVillainsPositionsToQuiz = [];
+        const villainsPositionsToQuiz = this.props.villainsPositionsToQuiz;
+        if (villainsPositionsToQuiz?.length > 0) {
+            situationsThatMeetVillainsPositionsToQuiz = availableSituationsWithPositionsThatHaveData.filter(
+                situation => situation.positions.some(pos => pos.preflopActions.some(pfa => villainsPositionsToQuiz.includes(pfa.actorsPosition)))
+            );
+            if (situationsThatMeetVillainsPositionsToQuiz.length === 0) {
+                alert("Villains's Position Filters doesn't work.");
+            }
+        }
+
+        // get result set of villain + hero's position to quiz
+        const idsThatMatchVillainCriteria = situationsThatMeetVillainsPositionsToQuiz.map(s => s.id);
+        const idsThatMatchHerosCriteria = situationsThatMeetHerosPositionsToQuiz.map(s => s.id);
+        let combinedIds = [];
+        if (idsThatMatchVillainCriteria.length > 0 && idsThatMatchHerosCriteria.length > 0) {
+            combinedIds = intersect(idsThatMatchVillainCriteria, idsThatMatchHerosCriteria);
+        } else if (idsThatMatchHerosCriteria.length > 0) {
+            combinedIds = idsThatMatchHerosCriteria;
+        } else {
+            combinedIds = idsThatMatchVillainCriteria;
+        }
+
+        if (combinedIds.length === 0 && (idsThatMatchHerosCriteria.length > 0 || idsThatMatchVillainCriteria.length > 0)) {
+            alert("Position Filters causing conflict");
+        }
+
+        const situationsThatMatchPositionFilterCriteria = availableSituationsWithPositionsThatHaveData.filter(situation => combinedIds.includes(situation.id));
 
         // if heros positions to quiz are selected, we need a situation that includes those positions
         let randomSituation = {};
-        if (situationsThatMeetHerosPositionsToQuiz.length > 0) {
+        if (situationsThatMatchPositionFilterCriteria.length > 0) {
             randomSituation =
-                situationsThatMeetHerosPositionsToQuiz[
+                situationsThatMatchPositionFilterCriteria[
                     Math.floor(
-                        Math.random() * situationsThatMeetHerosPositionsToQuiz.length
+                        Math.random() * situationsThatMatchPositionFilterCriteria.length
                     )
                     ];
         } else {
@@ -150,6 +185,10 @@ class Drill extends Component {
 
     updateHerosPositionToDrill = (foo) => {
         this.props.quizActions.lockHerosPositionForQuiz(foo);
+    }
+
+    updateVillainsPositionToDrill = (foo) => {
+        this.props.quizActions.lockVillainsPositionForQuiz(foo);
     }
 
 
@@ -254,7 +293,10 @@ class Drill extends Component {
                 <Row>
                     <Col sm={1}>
                         <Row>
-                        <HerosPositionSelector onChange={this.updateHerosPositionToDrill}/>
+                            <HerosPositionSelector onChange={this.updateHerosPositionToDrill}/>
+                        </Row>
+                        <Row>
+                            <VillainsPositionSelector onChange={this.updateVillainsPositionToDrill}/>
                         </Row>
                         <Row>
                             {this.renderPreflopActionDescription()}
@@ -273,7 +315,7 @@ class Drill extends Component {
                         {this.props.quizHand && this.renderActionButtons()}
                     </Col>
                     <Col sm="4" className={"fit-content"}>{this.props.hasAnswered && this.renderRangeGrid()}</Col>
-                    <Col sm="4" className={"fit-content"}>{!this.props.hasAnswered && this.renderPreflopActionDescription()}</Col>
+                    {/*<Col sm="4" className={"fit-content"}>{!this.props.hasAnswered && this.renderPreflopActionDescription()}</Col>*/}
                 </Row>
             </div>
         );
@@ -293,6 +335,7 @@ function mapStateToProps(state, ownProps) {
         quizHand: state.quiz.hand,
         hasAnswered: state.quiz.hasAnswered,
         herosPositionsToQuiz: state.quiz.herosPositionsToQuiz,
+        villainsPositionsToQuiz: state.quiz.villainsPositionsToQuiz,
     };
 }
 

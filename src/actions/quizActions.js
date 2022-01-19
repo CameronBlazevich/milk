@@ -21,3 +21,7 @@ export function quizAnswered(actionChosen) {
 export function lockHerosPositionForQuiz(position) {
   return { type: ActionTypes.QUIZ_HEROS_POSITION_UPDATED, position }
 }
+
+export function lockVillainsPositionForQuiz(position) {
+  return { type: ActionTypes.QUIZ_VILLAINS_POSITION_UPDATED, position }
+}
